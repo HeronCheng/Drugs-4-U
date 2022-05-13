@@ -9,7 +9,6 @@ import Footer from "./Footer";
 
 const searchClient = algoliasearch( "process.env.ALGOLIA_APP_ID", "process.env.ALGOLIA_API_KEY" );
 
-
 const SearchPage = () => {
     
     return(
