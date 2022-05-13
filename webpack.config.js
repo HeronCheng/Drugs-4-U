@@ -2,13 +2,16 @@ const path = require( "path" );
 const HtmlWebpackPlugin = require( "html-webpack-plugin" );
 const { CleanWebpackPlugin } = require( "clean-webpack-plugin" );
 const webpack = require( "webpack" );
-require( "dotenv" ).config( { path : "./.env" } ); 
+const dotEnv = require( "dotenv-webpack" );
 
-module.exports={
+module.exports={ 
     devtool : "eval-source-map",
     mode : "development",
-    node : {
-        fs : "empty"
+    resolve : {
+        fallback : {
+            fs : "empty"
+        }
+        
     },
     entry : {
         index : path.resolve( __dirname,"./src/index.js" ),
@@ -24,9 +27,7 @@ module.exports={
         } ),
         new CleanWebpackPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.DefinePlugin( {
-            "process.env" : JSON.stringify( process.env ),
-        } ),
+        new dotEnv()
     ],
     optimization : {
         moduleIds : "named"
