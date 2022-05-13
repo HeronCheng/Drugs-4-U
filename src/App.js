@@ -1,12 +1,29 @@
 import React from "react";
-import Nav from "./components/Nav.js";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 import "./tailwind.css";
+//components
+import HomePage from "./components/HomePage";
+import SearchResultPage from "./components/SearchResultPage";
+import DuplicatePage from "./components/DuplicatePage";
+import SignInUpPage from "./components/SignInUpPage";
+import MemberPage from "./components/MemberPage";
+import SearchPage from "./components/SearchPage";
 
 const App = () => {
     return (
-        <React.Fragment>
-            <Nav />
-        </React.Fragment>
+        <>
+            <BrowserRouter>
+                <Routes>
+                    <Route path= "/" element = { <HomePage /> }/>
+                    <Route path= "/search" element = { <SearchPage /> }/>
+                    <Route path= "/searchResult" element = { <SearchResultPage /> }/>
+                    <Route path= "/duplicate_check" element = { <DuplicatePage /> }/>
+                    <Route path= "/signinup" element = { <SignInUpPage /> }/>
+                    
+                    <Route path= "/member" element = { <MemberPage /> }/>
+                </Routes>
+            </BrowserRouter>
+        </>
     );
 };
 

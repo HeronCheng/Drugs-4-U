@@ -2,60 +2,67 @@ const path = require( "path" );
 const HtmlWebpackPlugin = require( "html-webpack-plugin" );
 const { CleanWebpackPlugin } = require( "clean-webpack-plugin" );
 const webpack = require( "webpack" );
+require( "dotenv" ).config( { path : "./.env" } ); 
 
 module.exports={
-    devtool: "eval-source-map",
-    mode: "development",
-    entry: {
-        index: path.resolve( __dirname,"./src/index.js" ),
+    devtool : "eval-source-map",
+    mode : "development",
+    node : {
+        fs : "empty"
     },
-    output:{
-        filename:"main.js",
-        path:path.resolve( __dirname,"dist" ),
-        publicPath: "/"
+    entry : {
+        index : path.resolve( __dirname,"./src/index.js" ),
     },
-    plugins: [
+    output : {
+        filename : "main.js",
+        path : path.resolve( __dirname,"dist" ),
+        publicPath : "/"
+    },
+    plugins : [
         new HtmlWebpackPlugin( {
-            template:"./public/index.html"
+            template : "./public/index.html"
         } ),
         new CleanWebpackPlugin(),
         new webpack.HotModuleReplacementPlugin(),
+        new webpack.DefinePlugin( {
+            "process.env" : JSON.stringify( process.env ),
+        } ),
     ],
-    optimization: {
-        moduleIds: "named"
+    optimization : {
+        moduleIds : "named"
     },
-    devServer: {
-        host:"localhost",
-        port: 3000,
-        compress: false,
-        open: true,
-        liveReload: true,
-        historyApiFallback: true,
+    devServer : {
+        host : "localhost",
+        port : 3000,
+        compress : false,
+        open : true,
+        liveReload : true,
+        historyApiFallback : true,
     },
-    module:{
-        rules:[
+    module : {
+        rules : [
             {
-                test:/\.css$/i,
-                use:[ "style-loader","css-loader","postcss-loader" ]
+                test : /\.css$/i,
+                use : [ "style-loader","css-loader","postcss-loader" ]
             },
             {
-                test: /\.m?js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader",
-                    options: {
-                        presets: [ "@babel/preset-env" ],
-                        plugins:[ "@babel/plugin-transform-runtime" ]
+                test : /\.m?js$/,
+                exclude : /node_modules/,
+                use : {
+                    loader : "babel-loader",
+                    options : {
+                        presets : [ "@babel/preset-env" ],
+                        plugins : [ "@babel/plugin-transform-runtime" ]
                     }
                 }
             },
             {
-                test: /\.(png|jpg|jpeg|svg|gif)$/,
-                type: "asset/resource",
+                test : /\.(png|jpg|jpeg|svg|gif)$/,
+                type : "asset/resource",
             },
             {
-                test: /\.html$/,
-                loader: "html-withimg-loader"
+                test : /\.html$/,
+                loader : "html-withimg-loader"
             }
         ]
     }

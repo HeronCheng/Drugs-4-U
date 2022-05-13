@@ -54,5 +54,10 @@
   },
   "remoteconfig": {
     "template": "remoteconfig.template.json"
+  },
+  "extensions": {
+    "firestore-algolia-search": "algolia/firestore-algolia-search@0.5.9",
+    "firestore-algolia-search-lwcl": "algolia/firestore-algolia-search@0.5.9",
+    "firestore-algolia-search-3yy3": "algolia/firestore-algolia-search@0.5.9"
   }
 }
