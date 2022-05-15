@@ -16,7 +16,7 @@ const App = () => {
                 <Routes>
                     <Route path= "/" element = { <HomePage /> }/>
                     <Route path= "/search" element = { <SearchPage /> }/>
-                    <Route path= "/searchResult" element = { <SearchResultPage /> }/>
+                    <Route path= "/search/:id" element = { <SearchResultPage /> }/>
                     <Route path= "/duplicate_check" element = { <DuplicatePage /> }/>
                     <Route path= "/signinup" element = { <SignInUpPage /> }/>
                     

@@ -15,7 +15,6 @@ module.exports = {
             backgroundImage : {
                 "home" : "url('./img/background14.jpg')",
                 "main" : "url('./img/background10.jpg')",
-                
             },
             animation : {
                 "shake-vertical" : "shake-vertical 5s linear infinite both",

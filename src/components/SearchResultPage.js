@@ -1,18 +1,28 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 //components
 import Nav from "./Nav.js";
 import Footer from "./Footer";
-//圖片
-import search from "../img/search.png";
+import {db, doc, getDoc, collection, setDoc}  from "./FirebaseConfig";
+
 
 const SearchResultPage = () => {
+    let { id } = useParams();
+    async function fetchData(){
+        let docSnap = await getDoc(doc(db, "undischarged", id));
+        return docSnap;
+    }
+    fetchData().then(result=>{			
+        if(result!==null){		
+            result.forEach((doc) => {
+                    console.log(doc)
+                });
+    }})
     return(
         <>
             <Nav/>
             <div className="pt-20 h-36 bg-sky-100 z-0">
-                <form className="relative z-10 bg-sky-100">
-                    <input placeholder="請輸入藥名" className="rounded-2xl pl-14 h-10 w-72 ml-11" type="search"/><button type="submit" className="absolute right-[94.5%] top-1 w-8" ><img src={search}/></button>
-                </form>
+                
             </div>
             <div className="my-10 flex w-full justify-around">
                 <div className="w-[55%] h-72 border-stone-300 border-4 border-solid rounded-md"></div>
