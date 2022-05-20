@@ -58,6 +58,7 @@ with open("appearance5.json", mode="r", newline='',encoding='UTF-8') as json_fil
         requests.adapters.DEFAULT_RETRIES=15
         s=requests.Session()
         s.keep_alive = False
+        s.close()
         r = s.get(url, headers=headers, timeout=500)
         time.sleep(random.randint(1,10))
         with open('{}.pdf'.format(name), mode='wb') as file:

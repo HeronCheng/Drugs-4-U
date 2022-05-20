@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 //components
 import Nav from "./Nav.js";
@@ -10,10 +10,15 @@ const HomePageMain = () => {
     const goToSecond = () => {
         window.location.hash = "#second";
     };
-
+    const [ openState, setOpenState ] = useState(false);
+    window.setTimeout(( () => setOpenState(true) ), 1500);
+    window.setTimeout(( () => document.getElementById("opening").style.display="none" ), 3000);
     return(
         <>
             <div className="bg-home bg-cover bg-no-repeat bg-scroll h-screen relative">
+                <div id="opening" className={openState?("w-full h-full flex justify-center items-center bg-zinc-700 tracking-out-contract z-20 fixed"):("w-full h-full flex justify-center items-center bg-zinc-700 tracking-in-expand z-20 fixed")}>
+                    <span className="text-8xl font-ubuntu italic underline text-sky-100 ">Drugs 4 U</span>
+                </div>
                 <Nav/>
                 <img src={downicon} className="animate-shake-vertical w-11 absolute left-[47%] top-[90%] cursor-pointer" onClick={goToSecond}/>
                 <div className="absolute left-[10%] top-1/3 ">

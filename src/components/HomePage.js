@@ -5,11 +5,12 @@ import HomePageMain from "./HomePageMain";
 import Footer from "./Footer";
 
 const HomePage = () => {
+    
     return(
-        <React.Fragment>
+        <>
             <HomePageMain/>
             <Footer/>
-        </React.Fragment>
+        </>
     );
 };
 
