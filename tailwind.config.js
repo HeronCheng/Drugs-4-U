@@ -15,6 +15,8 @@ module.exports = {
             backgroundImage : {
                 "home" : "url('./img/background14.jpg')",
                 "main" : "url('./img/background10.jpg')",
+                "dropdown" : "url('./img/dropdown.png')",
+                "dropup" : "url('./img/dropup.png')",
             },
             animation : {
                 "shake-vertical" : "shake-vertical 5s linear infinite both",
@@ -32,6 +34,9 @@ module.exports = {
                 "ubuntu" : [ "Ubuntu", "sans-serif" ],
                 "inter" : [ "Inter", "sans-serif" ],
             },
+            fontSize : {
+                "4.5xl" : "2.5rem",
+            }
         },
     },
     plugins : []   

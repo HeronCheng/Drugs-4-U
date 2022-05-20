@@ -33,5 +33,6 @@ module.exports = {
         "semi-spacing" : "error",
         "object-curly-spacing" : [ "error", "always" ],
         "key-spacing" : [ "error", { beforeColon : true, afterColon : true } ],
+        "react/prop-types" : "off"
     },
 };

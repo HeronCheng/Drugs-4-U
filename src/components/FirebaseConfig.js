@@ -1,12 +1,9 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, connectFirestoreEmulator, doc, getDocs,getDoc,collection,query, where,setDoc } from "firebase/firestore";
-import firebase from "firebase/compat/app";
-// import * as firebaseui from "firebaseui";
-// import "firebaseui/dist/firebaseui.css";
-// import { getAuth } from "firebase/auth";
-// import React, { useEffect, useState, forwardRef, useImperativeHandle } from "react";
-// import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-// import { Link } from "react-router-dom";
+import { getFirestore, doc, getDocs,getDoc,collection,query, where,setDoc } from "firebase/firestore";
+import { getStorage, ref, getDownloadURL, listAll } from "firebase/storage";
+import * as firebaseui from "firebaseui";
+import "firebaseui/dist/firebaseui.css";
+import { getAuth } from "firebase/auth";
 
 
 
@@ -23,13 +20,11 @@ const firebaseConfig = {
 
 const app = initializeApp( firebaseConfig );
 
-// Get a reference to the database service
 const db = getFirestore( app );
-// connectFirestoreEmulator(db, 'localhost', 8080);
 
+const storage = getStorage( app );
 
-
-// const auth = getAuth( app );
+const auth = getAuth( app );
 
 
 
@@ -57,47 +52,10 @@ const db = getFirestore( app );
 
 // Initialize the FirebaseUI Widget using Firebase.
 
-// const uiConfig = {
-//     callbacks : {
-//         signInSuccessWithAuthResult( authResult, redirectUrl ) {
-//             return true;
-//         },
-//         uiShown() {
-//             document.getElementById( "loader" ).style.display = "none";
-//         },
-//     },
-//     signInFlow : "popup",
-//     signInSuccessUrl : "/listpage",
-//     signInOptions : [
-//         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-//     ],
-// };
 
 
 
-// const Signinup=() => {
-//     const [ isSignedIn, setIsSignedIn ] = useState( false ); // Local signed-in state.
 
-//     // Listen to the Firebase Auth state and set the local state.
-//     useEffect( () => {
-//         const unregisterAuthObserver =auth.onAuthStateChanged( user => {
-//             localStorage.setItem( "userStatus", user.accessToken );
-//             setIsSignedIn( !!user );
-//         } );
-//         return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
-//     }, [] );
-//     console.log( isSignedIn );
-//     if ( !isSignedIn ) {
-//         return (
-//             <div>
-//                 <h1 className="text-center">Welcome to start Organize Yourself!</h1>
-//                 <p className="text-center">Please sign-in:</p>
-//                 <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
-//                 <div id="loader" className="text-center">Loading...</div>
-//             </div>
-//         );
-//     }
-// };
 
 
 
@@ -140,17 +98,10 @@ const db = getFirestore( app );
 
 
 
-// export default Signinup;
+
 
 export {
-    db,
-    doc,
-    getDocs,
-    getDoc,
-    collection,
-    query, 
-    where,
-    setDoc,
-    // SignOut,
-    // auth
+    db, doc, getDocs, getDoc, collection, query, where, setDoc,
+    auth,
+    storage, ref, getDownloadURL, listAll
 };

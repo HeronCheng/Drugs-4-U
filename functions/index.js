@@ -29,10 +29,10 @@ const algoliaClient = algoliasearch(functions.config().algolia.appid, functions.
 // the index name according to which environment is running. functions.config().projectId is a default
 // property set by Cloud Functions.
 
-const collectionIndex = algoliaClient.initIndex("undischarged");
+const collectionIndex = algoliaClient.initIndex("cancellation");
 
 // Create a HTTP request cloud function.
-export const onProductCreated = functions.firestore.document("undischarged/{undischargedId}").onCreate(
+export const onProductCreated = functions.firestore.document("cancellation/{cancellationId}").onCreate(
   ((snap, context) => {
     return collectionIndex.saveObject({
       objectID : snap.id,
@@ -42,7 +42,7 @@ export const onProductCreated = functions.firestore.document("undischarged/{undi
 )
 
 export const onProductUpdated = functions.firestore
-  .document("undischarged/{undischargedId}")
+  .document("cancellation/{cancellationId}")
   .onUpdate((change, context) => {
 
     // Get the old product data
@@ -55,7 +55,7 @@ export const onProductUpdated = functions.firestore
     return collectionIndex.partialUpdateObject(product)
 });
 
-export const onProductDeleted = functions.firestore.document("undischarged/{undischargedId}").onDelete(
+export const onProductDeleted = functions.firestore.document("cancellation/{cancellationId}").onDelete(
   ((snap, context) => {
     return collectionIndex.deleteObject(snap.id)
   })

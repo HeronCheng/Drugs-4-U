@@ -1,4 +1,5 @@
 {
     "eslint.runtime": "",
+    "jupyter.jupyterServerType": "local",
 
 }
