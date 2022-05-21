@@ -37,8 +37,19 @@ select::-ms-expand {
     display: none;
 }
 
-/*algolia的input box樣式調整*/
+/*input box樣式調整*/
 .ais-SearchBox-input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+}
+.ais-SearchBox .ais-SearchBox-input {
+    width: 15rem;
+    height: 2.5rem;
+    border-radius: 0.75rem;
+    margin-left: 1rem;
+    padding-left: 2.75rem;
+    margin-top: 1rem;
+}
+.ais-SearchBox-resetIcon {
     display: none;
 }
 .ais-SearchBox-submit {
@@ -46,6 +57,17 @@ select::-ms-expand {
 }
 .ais-SearchBox-loadingIndicator {
     display: none;
+}
+/*搜尋頁下方分頁*/
+.ais-Pagination-list {
+    display: flex;
+    margin-bottom: 1.5rem;
+    font-size: 1.125rem;
+    line-height: 1.75rem; 
+}
+.ais-Pagination-item {
+    margin-left: 0.5rem; 
+    margin-right: 0.5rem;  
 }
 
 /*進場動畫*/

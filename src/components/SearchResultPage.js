@@ -64,7 +64,7 @@ const SearchResultPage = () => {
                             <table>
                                 <thead>
                                     <tr>
-                                        <th colSpan="2" className="mb-3 text-left"><span className="text-3xl mr-3.5 font-bold tracking-wider ">{drugData[0]}</span><span className="text-xl font-semibold">{drugData[1]}</span></th>
+                                        <th colSpan="2" className="mb-3 text-left text-cyan-900"><span className="text-3xl mr-3.5 font-bold tracking-wider ">{drugData[0]}</span><span className="text-2xl font-semibold">{drugData[1]}</span></th>
                                     </tr>
                                 </thead>
                                 <tbody className="align-top leading-7">
