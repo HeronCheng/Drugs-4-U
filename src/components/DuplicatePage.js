@@ -13,7 +13,7 @@ const DuplicatePage = () => {
                 <form className="relative z-10 bg-sky-100">
                     <input placeholder="請輸入藥名" className="rounded-2xl pl-14 h-10 w-72 ml-11" type="search"/>
                     <button type="submit" className="absolute right-[94.5%] top-1 w-8" >
-                        <img src={search} className="ml-8"/>
+                        <img src={search} className="ml-2"/>
                     </button>
                 </form>
             </div>

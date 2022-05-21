@@ -8,14 +8,14 @@ import { getAuth } from "firebase/auth";
 
 
 const firebaseConfig = {
-    apiKey : process.env.REACT_APP_apiKey,
+    apiKey : process.env.REACT_APP_APIKEY,
     authDomain : "drugs-4-u.firebaseapp.com",
     databaseURL : "https://drugs-4-u-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId : "drugs-4-u",
     storageBucket : "drugs-4-u.appspot.com",
-    messagingSenderId : process.env.REACT_APP_messagingSenderId,
-    appId : process.env.REACT_APP_appId,
-    measurementId : process.env.REACT_APP_measurementId
+    messagingSenderId : process.env.REACT_APP_MESSAGINGSENDERID,
+    appId : process.env.REACT_APP_APPID,
+    measurementId : process.env.REACT_APP_MEASUREMENTID
 };
 
 const app = initializeApp( firebaseConfig );

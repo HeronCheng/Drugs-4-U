@@ -13,10 +13,10 @@ import search from "../img/search.png";
 
 const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter( {
     server : {
-        apiKey : "b9d17neE5wyIDvtLanjhxp69KIIWfNAH", // Be sure to use an API key that only allows search operations
+        apiKey : process.env.REACT_APP_TYPESENSE_APIKEY, // Be sure to use an API key that only allows search operations
         nodes : [
             {
-                host : "a6s4r87ukhp9q0i2p-1.a1.typesense.net",
+                host : process.env.REACT_APP_TYPESENSE_HOST,
                 port : "443",
                 protocol : "https",
             },
