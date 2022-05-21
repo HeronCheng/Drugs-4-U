@@ -29,7 +29,6 @@ const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter( {
 } );
 const searchClient = typesenseInstantsearchAdapter.searchClient;
 
-
 const SearchPage = () => {
     const [ selectedValue, setSelectedValue ] = useState( "undischarged" );
     const handleSelectChange = ( e ) => {
