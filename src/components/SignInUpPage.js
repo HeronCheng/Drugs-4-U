@@ -4,7 +4,7 @@ import firebase from "firebase/compat/app";
 //components
 import Nav from "./Nav.js";
 import Footer from "./Footer";
-import { auth } from "./FirebaseConfig";
+import auth from "./FirebaseConfig";
 
 
 const uiConfig = {

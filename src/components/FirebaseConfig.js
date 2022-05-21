@@ -18,6 +18,7 @@ const firebaseConfig = {
     measurementId : process.env.REACT_APP_MEASUREMENTID
 };
 
+
 const app = initializeApp( firebaseConfig );
 
 const db = getFirestore( app );
@@ -25,7 +26,6 @@ const db = getFirestore( app );
 const storage = getStorage( app );
 
 const auth = getAuth( app );
-
 
 
 //Facebook JavaScript SDK
@@ -98,10 +98,9 @@ const auth = getAuth( app );
 
 
 
-
+export default auth;
 
 export {
     db, doc, getDocs, getDoc, collection, query, where, setDoc,
-    auth,
     storage, ref, getDownloadURL, listAll
 };
