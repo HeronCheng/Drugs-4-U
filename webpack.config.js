@@ -23,7 +23,12 @@ module.exports={
         } ),
         new CleanWebpackPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new Dotenv(),
+        new Dotenv(
+            {
+                path : "./.env", 
+                safe : true, 
+            }
+        ),
     ],
     optimization : {
         moduleIds : "named"
