@@ -41,7 +41,7 @@ const Signinup=() => {
     console.log( isSignedIn );
     if ( !isSignedIn ) {
         return (
-            <div className="h-72 pt-10">
+            <div className="h-2/3 pt-10 ">
                 <h1 className="text-center mb-7 text-2xl font-semibold tracking-wide">Please Choose ONE to Sign-In</h1>
                 <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
                 <div id="loader" className="text-center">Loading...</div>

@@ -54,13 +54,13 @@ const Nav = () => {
                 <div className="cursor-pointer ml-10 font-ubuntu italic text-4.5xl text-blue-900 underline"><Link to="/">Drugs 4 U</Link></div>
                 <div className="flex-auto"></div>
                 <div className="flex justify-center items-center font-semibold text-xl text-blue-900 font-inter text-center ">
-                    <div id="1" className="mx-6 cursor-pointer w-28 h-16 leading-11 mt-0.5 hover:text-cyan-900 border-solid hover:border-b-4 border-sky-200" onMouseEnter={changeToTW} onMouseLeave={backToEng}>
+                    <div id="1" className={toTW1 ?( "nav-button w-28" ):( "nav-button w-28 tracking-widest" )} onMouseEnter={changeToTW} onMouseLeave={backToEng}>
                         <Link to="/search">{toTW1 ? "Find Drugs" : "藥品查詢"}</Link>
                     </div>
-                    <div id="2" className="mx-6 cursor-pointer w-52 h-16 leading-11 mt-0.5 hover:text-cyan-900 border-solid hover:border-b-4 border-sky-200" onMouseEnter={changeToTW} onMouseLeave={backToEng}>
+                    <div id="2" className={toTW2 ?( "nav-button w-52" ):( "nav-button w-52 tracking-widest" )} onMouseEnter={changeToTW} onMouseLeave={backToEng}>
                         <Link to="/duplicate_check">{toTW2 ? "Duplicate Checker" : "重複用藥檢核"}</Link>
                     </div>
-                    <div id="3" className="mx-6 cursor-pointer w-20 h-16 leading-11 mt-0.5 hover:text-cyan-900 border-solid hover:border-b-4 border-sky-200" onMouseEnter={changeToTW} onMouseLeave={backToEng}>
+                    <div id="3" className={toTW3 ?( "nav-button w-20" ):( "nav-button w-20 tracking-widest" )} onMouseEnter={changeToTW} onMouseLeave={backToEng}>
                         <Link to="/signinup">{toTW3 ? "Sign in" : "登入"}</Link>
                     </div>
                 </div>

@@ -58,18 +58,38 @@ select::-ms-expand {
 .ais-SearchBox-loadingIndicator {
     display: none;
 }
+/*修改搜尋card的highlight樣式*/
+.ais-Highlight-highlighted {
+    background-color: rgb(254 240 138);
+    font-style: normal;
+}
 /*搜尋頁下方分頁*/
 .ais-Pagination-list {
     display: flex;
     margin-bottom: 1.5rem;
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     line-height: 1.75rem; 
 }
 .ais-Pagination-item {
     margin-left: 0.5rem; 
     margin-right: 0.5rem;  
 }
-
+/*搜尋頁左方分類欄位*/
+.ais-RefinementList-item {
+    margin-top: 0.875rem; /* 14px */
+    margin-bottom: 0.875rem; /* 14px */
+}
+.ais-RefinementList-labelText {
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+}
+.ais-RefinementList-checkbox {
+    width: 0.875rem;
+    height: 0.875rem;
+}
+.ais-RefinementList-count {
+    color: rgb(113 113 122);
+}
 /*進場動畫*/
 .tracking-in-expand{
     animation:tracking-in-expand 0.8s cubic-bezier(.215,.61,.355,1.000) .4s both
@@ -80,7 +100,7 @@ select::-ms-expand {
     100%{opacity:1}
 }
 .tracking-out-contract{
-    animation:tracking-out-contract .8s cubic-bezier(.55,.085,.68,.53) .4s both
+    animation:tracking-out-contract .8s cubic-bezier(.55,.085,.68,.53) .3s both
 }
 @keyframes tracking-out-contract{
     0%{opacity:1}
@@ -89,4 +109,11 @@ select::-ms-expand {
     85%{opacity: 0.6}
     95%{opacity:0.4}
     100%{letter-spacing:-.5em;opacity:0}
+}
+
+/*壓縮重複使用的class*/
+@layer components {
+    .nav-button {
+        @apply mx-6 cursor-pointer h-16 leading-11 mt-0.5 hover:text-slate-700 border-solid hover:border-b-4 border-sky-200
+    }
 }

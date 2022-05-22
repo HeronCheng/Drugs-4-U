@@ -14,6 +14,7 @@ module.exports = {
             }, 
             backgroundImage : {
                 "home" : "url('./img/background14.jpg')",
+                "home2" : "url('./img/background13.jpg')",
                 "main" : "url('./img/background10.jpg')",
                 "dropdown" : "url('./img/dropdown.png')",
                 "dropup" : "url('./img/dropup.png')",

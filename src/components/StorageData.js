@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { storage, ref, getDownloadURL, listAll } from "./FirebaseConfig";
+
 //圖片
 import underConstruction from "../img/under-construction.png";
+
 
 const StorageData = ( id ) => {
 
@@ -32,12 +34,15 @@ const StorageData = ( id ) => {
 
     return(
         <>
-            { url.length === 0 ?
-                ( <img src={underConstruction} key={underConstruction} alt="images"/> ):
-                ( url.map( ( url, index ) => {
-                    return <img src={url} key={index} alt="images"/>;
-                } ) )
-            }
+            <div className="">
+                { url.length === 0 ?
+                    ( <img src={underConstruction} key={underConstruction} alt="images"/> ):
+                    ( url.map( ( url, index ) => {
+                        return <img src={url} key={index} alt="images" className="mx-auto my-3.5"/>;
+                    } ) )
+                }
+            </div>
+            
         </>
     );
 };

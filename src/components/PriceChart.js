@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { db, query, where, collection, getDocs } from "./FirebaseConfig";
+//圖片
+import underConstruction1 from "../img/undercontruction.jpg";
 
 const PriceChart = ( id ) => {
     const [ priceData, setPriceData ] = useState ( "" );
@@ -22,7 +24,8 @@ const PriceChart = ( id ) => {
 
     return(
         <>
-            <canvas id="priceChart"></canvas>
+            <canvas id="priceChart" className="hidden"></canvas>
+            <img src={underConstruction1}/>
         </>
     );
 };

@@ -7,6 +7,9 @@ import Footer from "./Footer";
 import StorageData from "./StorageData";
 import PriceChart from "./PriceChart";
 import { db, doc, getDoc } from "./FirebaseConfig";
+import NationalDN from "../utils/nation";
+//圖片
+import loading from "../img/Rolling.gif";
 
 
 const SearchResultPage = () => {
@@ -49,16 +52,13 @@ const SearchResultPage = () => {
         return showPrice;
     };
 
-
-    
-
     return(
         <>
             <Nav/>
             <div className="pt-20 bg-sky-100 z-0">              
             </div>
             <div className="mt-10 flex w-full justify-around">
-                <div className="w-[55%] border-stone-300 border-4 border-solid rounded-md font-sans p-4">
+                <div className="w-[55%] border-stone-300 border-2 border-solid rounded-md font-sans p-4 shadow-lg flex justify-center items-center">
                     {( drugData !== "" ) ? 
                         ( <>
                             <table>
@@ -74,7 +74,7 @@ const SearchResultPage = () => {
                                     </tr>
                                     <tr>
                                         <td className="text-right font-semibold">主成分略述&nbsp;  </td>
-                                        <td className="pl-3 text-gray-600">{drugData[2]}</td>
+                                        <td className="pl-3 text-gray-600">{drugData[13]==="原料藥"?( drugData[1] ):( drugData[2] )}</td>
                                     </tr>
                                     <tr>
                                         <td className="text-right font-semibold">適應症&nbsp;  </td>
@@ -106,7 +106,9 @@ const SearchResultPage = () => {
                                     </tr>
                                     <tr>
                                         <td className="text-right font-semibold">製造廠國別&nbsp;  </td>
-                                        <td className="pl-3 text-gray-600">{drugData[8]}</td>
+                                        <td className="pl-3 text-gray-600">
+                                            {NationalDN[drugData[8]]}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td className="text-right font-semibold">申請商名稱&nbsp;  </td>
@@ -120,10 +122,10 @@ const SearchResultPage = () => {
                             </table>
                         </>
                         ) :
-                        ( <div>loading...</div> )                                            
+                        ( <img src={loading} className="w-24"/> )                                            
                     }
                 </div>
-                <div className="w-[37%] border-stone-300 border-4 border-solid rounded-md">
+                <div className="w-[37%] border-stone-300 border-2 border-solid rounded-md shadow-lg ">
                     <button className={ showPic ? "font-semibold text-lg py-1.5 w-1/2 border-2 bg-blue-100": "font-semibold text-lg py-1.5 w-1/2 border-2" } onClick={changeToPrice}>外觀</button>
                     <button className={ showPrice ? "font-semibold text-lg py-1.5 w-1/2 border-2 bg-blue-100": "font-semibold text-lg py-1.5 w-1/2 border-2" } onClick={changeToPic}>健保給付價格</button>
                     { showPic ? ( <StorageData id={id}/> ) : ( <PriceChart id={id}/> ) }
