@@ -128,10 +128,10 @@ const SearchResultPage = () => {
                 <div className="w-[37%] border-stone-300 border-2 border-solid rounded-md shadow-lg ">
                     <button className={ showPic ? "font-semibold text-lg py-1.5 w-1/2 border-2 bg-blue-100": "font-semibold text-lg py-1.5 w-1/2 border-2" } onClick={changeToPrice}>外觀</button>
                     <button className={ showPrice ? "font-semibold text-lg py-1.5 w-1/2 border-2 bg-blue-100": "font-semibold text-lg py-1.5 w-1/2 border-2" } onClick={changeToPic}>健保給付價格</button>
-                    { showPic ? ( <StorageData id={id}/> ) : ( <PriceChart id={id}/> ) }
+                    { showPic ? ( <StorageData id={id}/> ) : ( <PriceChart id={id} name={drugData[0]}/> ) }
                 </div>
             </div>
-            <div className="flex justify-end"><Link to="/search"><button className="border-4 rounded-2xl w-20 h-11 border-blue-900 hover:border-blue-600 bg-blue-900 hover:bg-blue-600 text-white shadow-lg text-lg tracking-wider m-5 mr-6">Back</button></Link></div>
+            <div className="flex justify-end"><Link to="/search"><button className="border-4 rounded-lg w-20 h-11 border-blue-900 hover:border-blue-600 bg-blue-900 hover:bg-blue-600 text-white shadow-lg text-lg tracking-wider m-5 mr-6">Back</button></Link></div>
            
             <Footer/>
         </>

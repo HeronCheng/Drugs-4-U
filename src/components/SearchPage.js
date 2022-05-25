@@ -125,11 +125,11 @@ const SearchPage = () => {
                         <div className="my-6 bg-teal-50 border-emerald-100 shadow-lg p-6 rounded-lg">
                             <div className="text-2xl font-bold mb-2.5 cursor-pointer relative" onClick={showSortList}>分類<img src={click} className="w-8 absolute bottom-0.5 left-14"/></div>
                             <div className={isActive ? "block":"hidden"}>
-                                <button className="block border-2 rounded-lg p-2 m-3 bg-slate-800 text-slate-100" value="劑型" onClick={e => changeType( e )}>藥品劑型</button>
-                                <button className="block border-2 rounded-lg p-2 m-3 bg-slate-800 text-slate-100" value="藥品類別" onClick={e => changeType( e )}>藥品類別</button>
-                                <button className="block border-2 rounded-lg p-2 m-3 bg-slate-800 text-slate-100" value="許可證種類" onClick={e => changeType( e )}>許可證種類</button>
-                                <button className="block border-2 rounded-lg p-2 m-3 bg-slate-800 text-slate-100" value="管制藥品分類級別" onClick={e => changeType( e )}>管制藥品分級</button>
-                                <button className="block border-2 rounded-lg p-2 m-3 bg-slate-800 text-slate-100" value="製造廠國別" onClick={e => changeType( e )}>製造廠國別</button>
+                                <button className="black-button" value="劑型" onClick={e => changeType( e )}>藥品劑型</button>
+                                <button className="black-button" value="藥品類別" onClick={e => changeType( e )}>藥品類別</button>
+                                <button className="black-button" value="許可證種類" onClick={e => changeType( e )}>許可證種類</button>
+                                <button className="black-button" value="管制藥品分類級別" onClick={e => changeType( e )}>管制藥品分級</button>
+                                <button className="black-button" value="製造廠國別" onClick={e => changeType( e )}>製造廠國別</button>
                             </div>
                             
                             <hr/>

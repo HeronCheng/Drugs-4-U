@@ -116,4 +116,7 @@ select::-ms-expand {
     .nav-button {
         @apply mx-6 cursor-pointer h-16 leading-11 mt-0.5 hover:text-slate-700 border-solid hover:border-b-4 border-sky-200
     }
+    .black-button {
+        @apply block border-2 rounded-lg p-2 m-3 bg-slate-800 hover:bg-slate-600 text-slate-100
+    }
 }
