@@ -18,6 +18,7 @@ module.exports = {
                 "main" : "url('./img/background10.jpg')",
                 "dropdown" : "url('./img/dropdown.png')",
                 "dropup" : "url('./img/dropup.png')",
+                "bg3" : "url('./img/bg7.jpg')",
             },
             animation : {
                 "shake-vertical" : "shake-vertical 5s linear infinite both",

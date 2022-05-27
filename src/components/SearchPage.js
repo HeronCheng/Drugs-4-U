@@ -133,7 +133,7 @@ const SearchPage = () => {
                             </div>
                             
                             <hr/>
-                            <RefinementList attribute={type} className="w-52 mr-auto text-base"/>
+                            <RefinementList operator="or" attribute={type} className="w-52 mr-auto text-base"/>
                         </div>
                         <Hits 
                             hitComponent={Hit}
