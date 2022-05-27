@@ -20,21 +20,21 @@ const StorageData = ( id ) => {
                     }
                     return filtered;
                 }, [] );
-
+                
                 let promises = newArr.map( ( imageRef ) => getDownloadURL( ref( storage, imageRef ) ) );
                 Promise.all( promises ).then( ( urls ) => {
                     setUrl( urls );
                 } );
-
             } )
             .catch( ( error ) => {
                 console.log( error );
             } );
-    },[ url ] );
+    },[] );
 
     const [ packageInsert, setPackageInsert ] = useState( "" );
     const [ drugpackage, setDrugPackage ] = useState( "" );
     //從firestore取出仿單及外盒圖檔連結資料
+
     useEffect( () => {
         async function fetchData() {
             const docRef = doc( db, "package", id.id );
@@ -48,6 +48,7 @@ const StorageData = ( id ) => {
             setDrugPackage( result[1] );
         } );
     },[] );
+
     //展開 button 選項
     const [ insertIsActive, setInsertIsActive ] = useState( false );
     const showList = () => {
@@ -87,6 +88,7 @@ const StorageData = ( id ) => {
     };
     
     const PackageSelectOption = () => {
+
         const newArr2 = drugpackage.split( ";" );
         return (
             <>
@@ -94,6 +96,7 @@ const StorageData = ( id ) => {
                 <div className={packageIsActive? "absolute left-[210px] top-16 z-10 bg-slate-50 rounded-md p-2 w-28 text-center":"hidden"}>
                     {
                         ( newArr2.map( ( url, index ) => {
+
                             return (
                                 <a href={url} key={index} className="mx-auto mb-3.5 block">圖檔連結{index+1}</a>
                             );
@@ -126,4 +129,5 @@ const StorageData = ( id ) => {
     );
 };
 
+// const areEqual = ( prevProps, nextProps ) => true;
 export default StorageData;

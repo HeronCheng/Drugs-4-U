@@ -48,6 +48,7 @@ select::-ms-expand {
     margin-left: 1rem;
     padding-left: 2.75rem;
     margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 .ais-SearchBox-resetIcon {
     display: none;

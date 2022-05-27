@@ -27,7 +27,7 @@ const SearchResultPage = () => {
             setDrugData( result );
         } );
 
-    },[ drugData ] );
+    }, [] );
 
     const [ showPic, setShowPic ] = useState ( true );
     const [ showPrice, setShowPrice ] = useState ( false );

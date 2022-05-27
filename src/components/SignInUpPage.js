@@ -33,6 +33,7 @@ const Signinup=() => {
     // Listen to the Firebase Auth state and set the local state.
     useEffect( () => {
         const unregisterAuthObserver =auth.onAuthStateChanged( user => {
+            localStorage.setItem( "userUid", user.uid );
             localStorage.setItem( "userStatus", user.accessToken );
             setIsSignedIn( !!user );
         } );
