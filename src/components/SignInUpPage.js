@@ -39,10 +39,9 @@ const Signinup=() => {
         } );
         return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
     }, [] );
-    console.log( isSignedIn );
     if ( !isSignedIn ) {
         return (
-            <div className="h-2/3 pt-10 ">
+            <div className="h-[42%] tablet:h-[57.5%] pt-16 ">
                 <h1 className="text-center mb-7 text-2xl font-semibold tracking-wide">Please Choose ONE to Sign-In</h1>
                 <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
                 <div id="loader" className="text-center">Loading...</div>
@@ -58,7 +57,7 @@ const SignInUpPage = () => {
     return(
         <>
             <Nav/>
-            <div className="pt-20 h-16 z-0 bg-sky-100 ">
+            <div className="pt-[52px] tablet:pt-[66.5px] z-0 bg-darkblue ">
             </div>
             <Signinup/>
             <Footer/>

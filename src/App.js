@@ -8,6 +8,7 @@ import DuplicatePage from "./components/DuplicatePage";
 import SignInUpPage from "./components/SignInUpPage";
 import MemberPage from "./components/MemberPage";
 import SearchPage from "./components/SearchPage";
+import Auth from "./components/Auth";
 
 const App = () => {
     return (
@@ -17,10 +18,13 @@ const App = () => {
                     <Route path= "/" element = { <HomePage /> }/>
                     <Route path= "/search" element = { <SearchPage /> }/>
                     <Route path= "/search/:id" element = { <SearchResultPage /> }/>
-                    <Route path= "/duplicate_check" element = { <DuplicatePage /> }/>
-                    <Route path= "/signinup" element = { <SignInUpPage /> }/>
-                    
-                    <Route path= "/member" element = { <MemberPage /> }/>
+                    <Route path= "/member" element = { <Auth /> }>
+                        <Route path= "/member" element = { <MemberPage /> }/>
+                    </Route>
+                    <Route path= "/duplicate_check" element = { <Auth /> }>
+                        <Route path= "/duplicate_check" element = { <DuplicatePage /> }/>
+                    </Route>
+                    <Route path= "/signinup" element = { <SignInUpPage /> }/>                       
                 </Routes>
             </BrowserRouter>
         </>

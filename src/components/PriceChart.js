@@ -48,9 +48,10 @@ const PriceChart = ( { id, name } ) => {
                     return filtered;
                 },[] );
                 setChartData( newArr );
+                
             } );
         
-    },[ chartData ] );
+    },[] );
 
     const options = {
         responsive : true,
@@ -60,15 +61,63 @@ const PriceChart = ( { id, name } ) => {
             },
             title : {
                 display : true,
-                text : "歷年健保給付價格",
+                text : name+" 歷年健保給付價格",
             },
         },
     };
-   
+
+
     return(
         <>
-            { chartData[0] !== undefined ? ( chartData[0].document.劑型 === "錠劑" ? <ChartTablet chartData={chartData} options={options} name={name}/>:
-                <ChartOthers chartData={chartData} options={options} name={name}/> ): <img src={underConstruction1}/> }
+            { 
+                chartData[0] !== undefined ? ( chartData[0].document.劑型 === "錠劑" || 
+                chartData[0].document.劑型 === "口服懸液用粉劑" || 
+                chartData[0].document.劑型 === "丸劑" || 
+                chartData[0].document.劑型 === "口含錠" || 
+                chartData[0].document.劑型 === "口腔崩散錠" ||
+                chartData[0].document.劑型 === "口腔噴霧性膠囊" ||
+                chartData[0].document.劑型 === "口腔錠" ||
+                chartData[0].document.劑型 === "膜衣錠" ||
+                chartData[0].document.劑型 === "口溶膜" ||
+                chartData[0].document.劑型 === "口溶錠" ||
+                chartData[0].document.劑型 === "口頰溶片" ||
+                chartData[0].document.劑型 === "口頰錠" ||
+                chartData[0].document.劑型 === "子宮內避孕器" ||
+                chartData[0].document.劑型 === "可溶錠" ||
+                chartData[0].document.劑型 === "多層錠" ||
+                chartData[0].document.劑型 === "舌下錠" ||
+                chartData[0].document.劑型 === "咀嚼錠" ||
+                chartData[0].document.劑型 === "長效膜衣錠" ||
+                chartData[0].document.劑型 === "長效錠" ||
+                chartData[0].document.劑型 === "持續性膜衣錠" ||
+                chartData[0].document.劑型 === "持續性糖衣錠" ||
+                chartData[0].document.劑型 === "持續性藥效膜衣錠" ||
+                chartData[0].document.劑型 === "持續性藥效膠囊劑" ||
+                chartData[0].document.劑型 === "持續性藥效錠" ||
+                chartData[0].document.劑型 === "持續性釋放膜衣錠" ||
+                chartData[0].document.劑型 === "持續性釋放膠囊" ||
+                chartData[0].document.劑型 === "持續性釋放錠" ||
+                chartData[0].document.劑型 === "持續釋放口溶錠" ||
+                chartData[0].document.劑型 === "持續釋放膜衣錠" ||
+                chartData[0].document.劑型 === "凍晶口溶錠" ||
+                chartData[0].document.劑型 === "軟膠囊劑" ||
+                chartData[0].document.劑型 === "發泡錠" ||
+                chartData[0].document.劑型 === "微粒膠囊" ||
+                chartData[0].document.劑型 === "腸溶軟膠囊劑" ||
+                chartData[0].document.劑型 === "腸溶微粒膠囊劑" ||
+                chartData[0].document.劑型 === "腸溶膜衣錠" ||
+                chartData[0].document.劑型 === "腸溶膠囊劑" ||
+                chartData[0].document.劑型 === "腸溶糖衣錠" ||
+                chartData[0].document.劑型 === "腸溶錠" ||
+                chartData[0].document.劑型 === "緩釋微粒膠囊" ||
+                chartData[0].document.劑型 === "緩釋膜衣錠" ||
+                chartData[0].document.劑型 === "緩釋膠囊" ||
+                chartData[0].document.劑型 === "緩釋錠" ||
+                chartData[0].document.劑型 === "膜衣錠" ||
+                chartData[0].document.劑型 === "膠囊劑" ||
+                chartData[0].document.劑型 === "糖衣錠" ? 
+                    <ChartTablet chartData={chartData} options={options} name={name}/>:
+                    <ChartOthers chartData={chartData} /> ): <img src={underConstruction1}/> }
         </>
     );
 };

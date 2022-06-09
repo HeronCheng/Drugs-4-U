@@ -36,6 +36,7 @@ module.exports={
         liveReload : true,
         historyApiFallback : true,
     },
+
     module : {
         rules : [
             {

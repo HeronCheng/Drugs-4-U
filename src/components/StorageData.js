@@ -61,9 +61,9 @@ const StorageData = ( id ) => {
     const InsertSelectOption = () => {
         const newArr1 = packageInsert.split( ";" );
         return (
-            <>
+            <div className="relative">
                 <div onMouseOver={showList} onMouseOut={hideList}><button className="black-button">仿單圖檔連結</button></div>
-                <div className={insertIsActive? "absolute left-[70px] top-16 z-10 bg-slate-50 rounded-md p-2 w-28 text-center":"hidden"}>
+                <div className={insertIsActive? "absolute left-[14px] top-[54px] z-10 bg-slate-50 rounded-md p-2 w-28 text-center":"hidden"}>
                     {
                         ( newArr1.map( ( url, index ) => {
                             return (
@@ -72,7 +72,7 @@ const StorageData = ( id ) => {
                         } ) )
                     }
                 </div>
-            </>
+            </div>
             
         );
         
@@ -91,9 +91,9 @@ const StorageData = ( id ) => {
 
         const newArr2 = drugpackage.split( ";" );
         return (
-            <>
+            <div className="relative">
                 <div onMouseOver={showTheList} onMouseOut={hideTheList}><button className="black-button">外盒圖檔連結</button></div>
-                <div className={packageIsActive? "absolute left-[210px] top-16 z-10 bg-slate-50 rounded-md p-2 w-28 text-center":"hidden"}>
+                <div className={packageIsActive? "absolute left-[14px] top-[54px] z-10 bg-slate-50 rounded-md p-2 w-28 text-center":"hidden"}>
                     {
                         ( newArr2.map( ( url, index ) => {
 
@@ -103,7 +103,7 @@ const StorageData = ( id ) => {
                         } ) )
                     }
                 </div>
-            </>
+            </div>
             
         );
         
@@ -119,7 +119,7 @@ const StorageData = ( id ) => {
                         return <img src={url} key={index} alt="images" className="mx-auto my-3.5"/>;
                     } ) )
                 }
-                <div className="flex justify-center relative">
+                <div className="flex justify-center">
                     { packageInsert === "" ? "" : ( packageInsert.includes( ";" )? <InsertSelectOption/>:<a href={packageInsert} className="black-button">仿單圖檔連結</a> ) }
                     { drugpackage === "" ? "" : ( drugpackage.includes( ";" )? <PackageSelectOption/>:<a href={drugpackage} className="black-button">外觀圖檔連結</a> ) }
                 </div>

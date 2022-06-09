@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, getDocs,getDoc,collection,query, where,setDoc } from "firebase/firestore";
+import { getFirestore, doc, getDocs,getDoc,collection,query, where,setDoc, deleteDoc } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL, listAll } from "firebase/storage";
 import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
@@ -35,6 +35,6 @@ const auth = getAuth( app );
 export default auth;
 
 export {
-    db, doc, getDocs, getDoc, collection, query, where, setDoc,
+    db, doc, getDocs, getDoc, collection, query, where, setDoc, deleteDoc,
     storage, ref, getDownloadURL, listAll
 };
