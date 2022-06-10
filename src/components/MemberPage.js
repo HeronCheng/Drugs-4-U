@@ -20,19 +20,6 @@ const MemberPage = () => {
     const [ likeList, setListList ] = useState( [] );
     const [ listState, setListState ] = useState( "" );
   
-    useEffect( () => {
-        if ( user !== null ) {
-            setUserData( user.uid );
-        }
-    },[ user ] );
-
-    if ( user !== null ) {
-        user.providerData.forEach( ( profile ) => {
-            userName=profile.displayName;
-        } );
-    }
-    
-
     function exit() {
         auth.signOut();
         localStorage.removeItem( "userStatus" );
@@ -102,7 +89,7 @@ const MemberPage = () => {
                                             <Link to={`/search/${item.許可證字號}`}><div className="font-bold text-base sm:text-lg text-cyan-900 mb-2">{item.中文品名}</div><div className="text-sm sm:text-base">{item.英文品名}</div></Link>
                                         </div>
                                         <div className="flex-auto"></div>
-                                        <img src={cancel} className="w-8 h-8 justify-self-end cursor-pointer" onClick={() => handleDelete( item.id )}/>
+                                        <img src={cancel} className="w-8 h-8 justify-self-end cursor-pointer" onClick={() => handleDelete( item.許可證字號 )}/>
                                     </div>                              
                                 </div>
                             );

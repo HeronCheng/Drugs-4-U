@@ -53,15 +53,28 @@ const PriceChart = ( { id, name } ) => {
         
     },[] );
 
+
     const options = {
         responsive : true,
         plugins : {
             legend : {
                 position : "top",
+                labels: {
+                    font: {
+                        size: 14
+                    }
+                }
             },
             title : {
                 display : true,
-                text : name+" 歷年健保給付價格",
+                text : " 歷年健保給付價格",
+                font: {
+                    size: 16
+                },
+                padding: {
+                    bottom: 20,
+                    top:20
+                }
             },
         },
     };

@@ -3,13 +3,12 @@ import ReactDOM from "react-dom";
 import { SearchBox, InstantSearch, Hits, Highlight, Configure, Pagination, Stats, RefinementList } from "react-instantsearch-dom";
 import TypesenseInstantSearchAdapter from "typesense-instantsearch-adapter";
 import { Link, Outlet } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 
 //components
 import Nav from "./Nav.js";
 import Footer from "./Footer";
 import NationalDN from "../utils/nation";
-import { db, doc, setDoc, collection, getDocs, deleteDoc, query, where } from "./FirebaseConfig";
+import { db, doc, setDoc, collection, getDocs, getDoc, deleteDoc, query, where } from "./FirebaseConfig";
 
 //圖片
 import search from "../img/search.png";
@@ -63,11 +62,9 @@ const SearchPage = () => {
         const [ bookMark, setBookMark ] = useState( false );
 
         const userId =localStorage.getItem( "userUid" );
-        //添加項目
+        //添加收藏項目
         const addDoc= () => {
-            let docId=uuidv4();
             let newData={
-                id : docId,
                 中文品名 : hit.中文品名,
                 英文品名 : hit.英文品名,
                 許可證字號 : hit.許可證字號,
@@ -75,12 +72,41 @@ const SearchPage = () => {
                 適應症 : hit.適應症
             };
             async function addData() {
-                await setDoc( doc( db, "like_list", userId, "list", docId ), newData );
+                await setDoc( doc( db, "like_list", userId, "list", hit.許可證字號 ), newData );
             }
             addData()
                 .then( () => {
-                    console.log( "Document written with ID: ", docId );
-                    setBookMark( !bookMark );
+                    console.log( "Document written with ID: ", hit.許可證字號 );
+                    setBookMark( true );
+                } )    
+                .catch ( ( e ) => console.error( "Error adding document: ", e ) );
+        };
+        //確認此藥品是否已收藏(抓資料庫中的資料)
+        const fetchData = async() => {
+            const docSnap = await getDoc( doc( db, "like_list", userId, "list", hit.許可證字號 ) );
+            return docSnap.data();
+        };
+
+        fetchData().then( ( result ) => {
+            if( result !== undefined ) {
+                setBookMark( true );
+            }
+            else{
+                setBookMark( false );
+            }
+        })
+
+        //刪除收藏項目
+        const delDoc = () => {
+
+            async function delData() {
+                await deleteDoc( doc( db, "like_list", userId, "list", hit.許可證字號 ) );
+            }
+        
+            delData()
+                .then( () => {
+                    console.log( "Document delete with ID: ", hit.許可證字號 );
+                    setBookMark( false );
                 } )    
                 .catch ( ( e ) => console.error( "Error adding document: ", e ) );
         };
@@ -102,7 +128,7 @@ const SearchPage = () => {
                             /> 
                         </h1>
                     </Link>
-                    { localStorage.getItem( "userStatus" ) ? <img src={bookMark?fill:add} className="absolute right-[-7px] top-[-7px] cursor-pointer" onClick={addDoc}/> : "" }
+                    { localStorage.getItem( "userStatus" ) ? <img src={bookMark?fill:add} className="absolute right-[-7px] top-[-7px] cursor-pointer" onClick={bookMark?delDoc:addDoc}/> : "" }
                 </div>
                 <hr className="mb-3"/>
                 <p className="text-zinc-700 w-[95%] text-sm xs:text-base"><span className="font-semibold">適應症 :</span> {hit.適應症}</p>

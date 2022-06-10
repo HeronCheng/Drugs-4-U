@@ -68,7 +68,7 @@ const ChartOthers = ( { chartData } ) => {
                 return { x : data.document.有效起日, y : data.document.參考價 };
             } );
             firstData.push( { x : "now", y : arr1.at( -1 ).document.參考價 } );        
-            return data1 = {
+            return {
                 labels : newLabels,
                 datasets : [
                     {

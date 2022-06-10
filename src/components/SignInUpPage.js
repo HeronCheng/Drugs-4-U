@@ -20,7 +20,11 @@ const uiConfig = {
     signInSuccessUrl : "/member",
     signInOptions : [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        firebase.auth.FacebookAuthProvider.PROVIDER_ID
+        firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+        {
+            provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+            requireDisplayName: false
+        },
     ],
 };
 
@@ -41,8 +45,8 @@ const Signinup=() => {
     }, [] );
     if ( !isSignedIn ) {
         return (
-            <div className="h-[42%] tablet:h-[57.5%] pt-16 ">
-                <h1 className="text-center mb-7 text-2xl font-semibold tracking-wide">Please Choose ONE to Sign-In</h1>
+            <div className="h-[42%] tablet:h-[60%] pt-16 ">
+                <h1 className="text-center mb-7 text-3xl font-semibold tracking-wider">請選擇以下方式登入</h1>
                 <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
                 <div id="loader" className="text-center">Loading...</div>
             </div>

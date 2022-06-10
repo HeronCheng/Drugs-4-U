@@ -10,7 +10,8 @@ import { db, doc, getDoc } from "./FirebaseConfig";
 import NationalDN from "../utils/nation";
 //圖片
 import loading from "../img/Rolling.gif";
-
+import add from "../img/bookmark_add.png";
+import fill from "../img/bookmark_add_FILL.png";
 
 const SearchResultPage = () => {
     const [ drugData, setDrugData ] = useState ( "" );
