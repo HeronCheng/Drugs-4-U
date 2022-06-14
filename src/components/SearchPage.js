@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { SearchBox, InstantSearch, Hits, Highlight, Configure, Pagination, Stats, RefinementList } from "react-instantsearch-dom";
+import { SearchBox, InstantSearch, Highlight, Configure, Pagination, Stats, RefinementList, connectHits } from "react-instantsearch-dom";
 import TypesenseInstantSearchAdapter from "typesense-instantsearch-adapter";
 import { Link, Outlet } from "react-router-dom";
 
@@ -8,7 +8,8 @@ import { Link, Outlet } from "react-router-dom";
 import Nav from "./Nav.js";
 import Footer from "./Footer";
 import NationalDN from "../utils/nation";
-import { db, doc, setDoc, collection, getDocs, getDoc, deleteDoc, query, where } from "./FirebaseConfig";
+import { db, doc, setDoc, getDoc, deleteDoc } from "../firebaseConfig";
+import { AuthContext } from "../App";
 
 //圖片
 import search from "../img/search.png";
@@ -16,6 +17,8 @@ import click from "../img/click.png";
 import add from "../img/bookmark_add.png";
 import fill from "../img/bookmark_add_FILL.png";
 import close from "../img/close.png";
+import loading from "../img/loading.svg";
+
 
 const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter( {
     server : {
@@ -33,10 +36,14 @@ const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter( {
         query_by : "中文品名, 英文品名, 主成分略述, 許可證字號",
         facet_by : "劑型, 藥品類別, 管制藥品分類級別, 製造廠國別, 許可證種類"
     },
-} );
+} 
+);
 const searchClient = typesenseInstantsearchAdapter.searchClient;
 
 const SearchPage = () => {
+    //載入圖示
+    const [ isloading, setIsLoading ] = useState( true );
+
     const [ selectedValue, setSelectedValue ] = useState( "undischarged" );
     const [ showSelectedValue, setShowSelectedValue ] = useState( "未註銷藥品" );
     const handleSelectChange = ( e ) => {
@@ -57,11 +64,29 @@ const SearchPage = () => {
         }
     };
 
-    function Hit( { hit } ) {
+    const { isSignedIn, userUid } = useContext( AuthContext );
+
+    const [ signedIn ] = isSignedIn;
+    const [ uid ] = userUid; 
+
+
+    const Hits = ( { hits } ) => {
+        
+        return(
+            <ol className="w-full xs:w-[95%] tablet:w-[80%] md:w-2/3">
+                {hits.map( hit => (
+                    <Hit hit={hit} key={hit.許可證字號} uid={uid} />
+                ) )}
+            </ol>
+        );
+    };
+    const CustomHits = connectHits( Hits );
+
+
+    function Hit( { hit, uid } ) {
         let urlParameter = encodeURIComponent( hit.許可證字號 );
         const [ bookMark, setBookMark ] = useState( false );
 
-        const userId =localStorage.getItem( "userUid" );
         //添加收藏項目
         const addDoc= () => {
             let newData={
@@ -72,7 +97,7 @@ const SearchPage = () => {
                 適應症 : hit.適應症
             };
             async function addData() {
-                await setDoc( doc( db, "like_list", userId, "list", hit.許可證字號 ), newData );
+                await setDoc( doc( db, "like_list", uid, "list", hit.許可證字號 ), newData );
             }
             addData()
                 .then( () => {
@@ -83,7 +108,7 @@ const SearchPage = () => {
         };
         //確認此藥品是否已收藏(抓資料庫中的資料)
         const fetchData = async() => {
-            const docSnap = await getDoc( doc( db, "like_list", userId, "list", hit.許可證字號 ) );
+            const docSnap = await getDoc( doc( db, "like_list", uid, "list", hit.許可證字號 ) );
             return docSnap.data();
         };
 
@@ -94,13 +119,13 @@ const SearchPage = () => {
             else{
                 setBookMark( false );
             }
-        })
+        } );
 
         //刪除收藏項目
         const delDoc = () => {
 
             async function delData() {
-                await deleteDoc( doc( db, "like_list", userId, "list", hit.許可證字號 ) );
+                await deleteDoc( doc( db, "like_list", uid, "list", hit.許可證字號 ) );
             }
         
             delData()
@@ -110,6 +135,10 @@ const SearchPage = () => {
                 } )    
                 .catch ( ( e ) => console.error( "Error adding document: ", e ) );
         };
+
+        useEffect( () => {
+            setIsLoading( false );
+        },[] );
 
         return (
             <article className="border-solid border-y border-x-0 xs:border-2 shadow-none xs:shadow-md rounded-none xs:rounded-lg p-5 mx-auto my-0 xs:my-6 leading-8 hover:shadow-none xs:hover:shadow-lg hover:bg-slate-50">  
@@ -128,7 +157,7 @@ const SearchPage = () => {
                             /> 
                         </h1>
                     </Link>
-                    { localStorage.getItem( "userStatus" ) ? <img src={bookMark?fill:add} className="absolute right-[-7px] top-[-7px] cursor-pointer" onClick={bookMark?delDoc:addDoc}/> : "" }
+                    { signedIn ? <img src={bookMark?fill:add} className="absolute right-[-7px] top-[-7px] cursor-pointer" onClick={bookMark?delDoc:addDoc}/> : "" }
                 </div>
                 <hr className="mb-3"/>
                 <p className="text-zinc-700 w-[95%] text-sm xs:text-base"><span className="font-semibold">適應症 :</span> {hit.適應症}</p>
@@ -151,15 +180,19 @@ const SearchPage = () => {
         setIsActive( false );
     };
 
+
+
     return(
         <>
             <Nav/>
+            <div id="loading" className={isloading?( "w-full h-full flex justify-center items-center bg-zinc-300 z-20 fixed" ):"hidden" }>
+                <img src={loading}/>
+            </div>
             <InstantSearch searchClient={searchClient} indexName={selectedValue}>
                 <div className="pt-[52px] tablet:pt-[67px] bg-darkblue"></div>
                 <div className="block md:hidden mt-6 ml-11 text-2xl font-extrabold tracking-widest">藥品搜尋介面</div>
                 <div className="h-32 tablet:h-20 z-0 block tablet:flex">
                     <select className="ml-10 h-11 w-56 rounded-xl pl-3 leading-6 mt-6 mr-0 xs:mr-3 border shadow bg-dropdown" onChange={e => handleSelectChange( e )} >
-                        <option value="">請選擇想搜尋的藥品範圍</option>
                         <option value="未註銷藥品">未註銷藥品</option>
                         <option value="已註銷藥品">已註銷藥品</option>
                         <option value="全部藥品">全部藥品</option>
@@ -205,20 +238,17 @@ const SearchPage = () => {
                 <div className="ml-0 md:ml-9 mt-1.5 md:mt-4 border-t md:border-t-0">
                     <div className="flex justify-center md:justify-between">
                         <div className="hidden md:block my-6 bg-blue-50 border-slate-200 border-2 shadow-lg p-6 rounded-lg">
-                            <div className="text-2xl font-bold mb-2.5 cursor-pointer relative" onClick={showSortList}>分類<img src={click} className="w-8 absolute bottom-0.5 left-14"/></div>
-                            <div className={isActive ? "block":"hidden"}>
-                                <button className="black-button" value="劑型" onClick={e => changeType( e )}>藥品劑型</button>
-                                <button className="black-button" value="藥品類別" onClick={e => changeType( e )}>藥品類別</button>
-                                <button className="black-button" value="許可證種類" onClick={e => changeType( e )}>許可證種類</button>
-                                <button className="black-button" value="管制藥品分類級別" onClick={e => changeType( e )}>管制藥品分級</button>
-                                <button className="black-button" value="製造廠國別" onClick={e => changeType( e )}>製造廠國別</button>
-                            </div>
+                            <div className="text-2xl font-bold mb-2.5 relative">分類<img src={click} className="w-8 absolute bottom-0.5 left-14"/></div>
+                            <button className="black-button" value="劑型" onClick={e => changeType( e )}>藥品劑型</button>
+                            <button className="black-button" value="藥品類別" onClick={e => changeType( e )}>藥品類別</button>
+                            <button className="black-button" value="許可證種類" onClick={e => changeType( e )}>許可證種類</button>
+                            <button className="black-button" value="管制藥品分類級別" onClick={e => changeType( e )}>管制藥品分級</button>
+                            <button className="black-button" value="製造廠國別" onClick={e => changeType( e )}>製造廠國別</button>
                             <hr className="bg-slate-300 h-0.5"/>
                             <RefinementList operator="or" attribute={type} className="w-40 search:w-48 lg:w-52 mr-auto text-base"/>
                         </div>
-                        <Hits 
+                        <CustomHits 
                             hitComponent={Hit}
-                            className="w-full xs:w-[95%] tablet:w-[80%] md:w-2/3"
                         />
                         <div className="w-[1%] xl:w-1/12"></div>
                     </div>

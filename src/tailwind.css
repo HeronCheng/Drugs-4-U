@@ -149,7 +149,6 @@ select::-ms-expand {
     color: rgb(113 113 122);
 }
 
-/*數字分頁樣式*/
 
 /*進場動畫*/
 .tracking-in-expand{
@@ -184,7 +183,6 @@ select::-ms-expand {
         display: none;
     }
     .ais-SearchBox .ais-SearchBox-input {
-        margin-left: 2.5rem;
         width: 14rem;
     }
 }

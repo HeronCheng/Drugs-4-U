@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 import { SearchBox, InstantSearch, Configure, connectHits } from "react-instantsearch-dom";
 import TypesenseInstantSearchAdapter from "typesense-instantsearch-adapter";
 import { v4 as uuidv4 } from "uuid";
 //components
 import Nav from "./Nav.js";
 import Footer from "./Footer";
-import { db, doc, setDoc, collection, getDocs, deleteDoc, query, where } from "./FirebaseConfig";
+import { db, doc, setDoc, collection, getDocs, deleteDoc, query, where } from "../firebaseConfig";
 import duplicate from "../utils/duplicate";
+import { AuthContext } from "../App";
 //圖片
 import search from "../img/search.png";
 import add from "../img/add_box.png";
 import cancel from "../img/cancel.png";
 import listIcon from "../img/playlist_add_check.png";
 import listIcon2 from "../img/cropsquare.png";
-
+import loading from "../img/loading.svg";
 
 const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter( {
     server : {
@@ -29,16 +31,15 @@ const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter( {
     },
     additionalSearchParameters : {
         query_by : "中文品名, 英文品名, 主成分略述",
-        filter_by : "劑型:=錠劑"
+        filter_by : "劑型:=[錠劑, 膜衣錠, 膠囊劑, 內服液劑, 糖衣錠]"
     },
 } );
 
 const searchClient = typesenseInstantsearchAdapter.searchClient;
 
-const userId =localStorage.getItem( "userUid" );
 
+function Hit( { hit, handleList, uid } ) {  
 
-function Hit( { hit, handleList } ) {  
     //添加項目
     const addDoc= ( name_ch, name_en, number ) => {
         let docId=uuidv4();
@@ -49,7 +50,7 @@ function Hit( { hit, handleList } ) {
             許可證字號 : number
         };
         async function addData() {
-            await setDoc( doc( db, "dup_check_list", userId, "list", docId ), newData );
+            await setDoc( doc( db, "dup_check_list", uid, "list", docId ), newData );
         }
         addData()
             .then( () => console.log( "Document written with ID: ", docId ) )    
@@ -75,6 +76,13 @@ function Hit( { hit, handleList } ) {
 
 const DuplicatePage = () => {
 
+    //載入圖示
+    const [ isloading, setIsLoading ] = useState( true );
+
+    const { userUid } = useContext( AuthContext );
+
+    const [ uid ] = userUid;
+
     const [ isOpen, setIsOpen ] = useState( false );
 
     const open = () => {
@@ -92,20 +100,21 @@ const DuplicatePage = () => {
     };
 
     //抓資料庫中的資料
-    const fetchData = async() => {
-        const docSnap = await getDocs( collection( db, "dup_check_list", userId, "list" ) );
+    const fetchData = async( uid ) => {
+        const docSnap = await getDocs( collection( db, "dup_check_list", uid, "list" ) );
         return docSnap;
     };
 
     let list=[];
 
     useEffect( () => {
-        fetchData().then( result => {			
+        fetchData( uid ).then( result => {			
             if( result!==null ) {		
                 result.forEach( ( doc ) => {                   
                     list.push( doc.data() );
                 } );
                 setDupCheckList( list );
+                setIsLoading( false );
             } } )
             .catch( console.log( "fail" ) );
     }, [ listState ] );
@@ -115,10 +124,10 @@ const DuplicatePage = () => {
     } );
 
     //刪除資料
-    const handleDelete = ( id ) => {
+    const handleDelete = ( uid, id ) => {
 
         async function deleteData() {
-            await deleteDoc( doc( db, "dup_check_list", userId, "list", id ) );
+            await deleteDoc( doc( db, "dup_check_list", uid, "list", id ) );
         }
 
         deleteData()
@@ -131,7 +140,7 @@ const DuplicatePage = () => {
     const Hits = ( { hits } ) => (
         <ol className="w-60 rounded-xl ml-4 absolute z-10 top-[66px] left-[-16px]">
             {hits.map( hit => (
-                <Hit hit={hit} key={hit.許可證字號} handleList={handleList}/>
+                <Hit hit={hit} key={hit.許可證字號} handleList={handleList} uid={uid}/>
             ) )}
         </ol>
     );
@@ -195,38 +204,77 @@ const DuplicatePage = () => {
                         console.log( "查無重複用藥" );
                     }
                     else{                       
-                        testValue.push( [ searchParameter[i].中文品名,searchParameter[k].中文品名 ] );
+                        testValue.push( [ i,k ] );
                     } 
-                                
-
-                }   
-                        
+                }               
             }
         }
         return testValue; 
     };
+
     const [ resultState, setResultState ] = useState( [] );  
     
-    function goCheck () {
-        fetchATCData().then( ( result ) => {
-            if( result.length>0 ) {
-                setResultState( result );
-                setCheckState( "以上組合可能存在重複用藥的問題，" );
-            }
-            else{
-                setCheckState( "查無重複用藥問題，" );
-            }       
-        } );
-        
+    function goCheck ( uid ) {
+        if( dupCheckList.length<2 ) {
+            document.getElementById( "alert" ).innerHTML="請至少選擇2個品項!";
+        }
+        else{
+            document.getElementById( "alert" ).innerHTML="";
+            fetchATCData().then( ( result ) => {
+                let docId = uuidv4();
+                let compareData=[];
+                result.forEach( item => {
+                    compareData.push( [ searchParameter[item[0]].中文品名, searchParameter[item[1]].中文品名 ] );
+                } 
+                );
+                let databaseData=[];
+                result.forEach( item => {
+                    databaseData.push( searchParameter[item[0]].中文品名+"%"+searchParameter[item[0]].許可證字號+"&"+searchParameter[item[1]].中文品名+"%"+searchParameter[item[1]].許可證字號 );
+                } );
+                if( result.length>0 ) {
+                    setResultState( compareData );
+                    setCheckState( "以上組合可能存在重複用藥的問題，" );
+                    let newData={
+                        id : docId,
+                        評估品項 : databaseData,
+                        評估結果 : "以上組合可能存在重複用藥的問題，如上述結果有疑慮，請洽詢醫師或藥師。"
+                    };
+                    async function addData() {
+                        await setDoc( doc( db, "dup_result_list", uid, "list", docId ), newData );
+                    }
+                    addData()
+                        .then( () => console.log( "Document written with ID: ", docId ) )    
+                        .catch ( ( e ) => console.error( "Error adding document: ", e ) );
+                }
+                else{
+                    setCheckState( "查無重複用藥問題，" );
+                    let newData={
+                        id : docId,
+                        評估品項 : searchParameter,
+                        評估結果 : "查無重複用藥問題，如上述結果有疑慮，請洽詢醫師或藥師。"
+                    };
+                    async function addData() {
+                        await setDoc( doc( db, "dup_result_list", uid, "list", docId ), newData );
+                    }
+                    addData()
+                        .then( () => console.log( "Document written with ID: ", docId ) )    
+                        .catch ( ( e ) => console.error( "Error adding document: ", e ) );
+                }       
+            } );
+        }       
     };
+
     return(
         <>
+            <div id="loading" className={isloading?( "w-full h-full flex justify-center items-center bg-zinc-300 z-20 fixed" ):"hidden" }>
+                <img src={loading}/>
+            </div>
             <Nav/>
             <div className="pt-[67px] bg-darkblue z-0 " >                 
             </div>           
             <div className="mt-5 mb-10 md:my-5 block md:flex w-full justify-center" >
-                <div className={dupCheckList.length<2?"w-full md:w-[44%] h-[420px] px-5 pb-5":"w-full md:w-[44%] px-5 pb-5"}>
-                    <div className="w-[90%] xs:w-[80%] md:w-full mx-auto">
+                <div className={dupCheckList.length<2?"w-full md:w-[44%] h-[440px] px-5 pb-5":"w-full md:w-[44%] px-5 pb-5"}>
+                    <div className="w-full xss:w-[90%] xs:w-[80%] md:w-full mx-auto">
                         <InstantSearch searchClient={searchClient} indexName="undischarged">
                             <div className="bg-white block dup:flex">   
                                 <Configure hitsPerPage={6} />
@@ -240,12 +288,13 @@ const DuplicatePage = () => {
                                             /> : ""
                                     }
                                 </div>  
-                                <div className="ml-0 dup:ml-5 mt-2 dup:mt-6 mb-6 md:mb-0 font-semibold">檢查您是否有吃到<span className="text-rose-500">重複</span>的藥品 :<br/>請搜尋藥品按下提交，<span id="dup_text_right">右</span><span className="hidden" id="dup_text_down">下</span>方會呈現結果。</div>            
+                                <div className="ml-0 dup:ml-5 mt-2 dup:mt-6 mb-6 md:mb-0 font-semibold">檢查您是否有吃到<span className="text-rose-500">重複</span>的藥品 :
+                                    <br/>請搜尋藥品按下送出，<span id="dup_text_right">右</span><span className="hidden" id="dup_text_down">下</span>方會呈現結果。</div>            
                             </div>                                       
                         </InstantSearch>     
                         <div className="flex mt-3 mb-5 bg-gradient-to-r from-blue-300 to-white rounded">
                             <img src={listIcon}/>
-                            <div className="leading-[3rem] font-extrabold text-2xl tracking-widest ml-2" onMouseOver={close}>已選擇藥品</div>
+                            <div className="leading-[3rem] font-extrabold text-2xl tracking-widest ml-2" onMouseOver={close}>已選擇藥品&nbsp;&nbsp;<span className="text-base tracking-wide">請至少選擇<span className="text-rose-500">2個</span>品項</span></div>
                         </div>
                         {dupCheckList.map( function( item,index ) {
                             return (
@@ -253,22 +302,24 @@ const DuplicatePage = () => {
                                     <div className="w-10 mb-3 leading-[108px] text-2xl font-extrabold text-slate-50 text-center bg-gray-600 rounded mr-3">{index+1}</div>
                                     <div className="flex w-[100%] border-2 border-stone-600 rounded mb-3 p-5 bg-zinc-50 hover:bg-zinc-100 hover:shadow-md">
                                         <div>
-                                            <div className="font-bold text-base sm:text-lg text-cyan-900 mb-2">{item.中文品名}</div><div className="text-sm sm:text-base">{item.英文品名}</div>
+                                            <Link to={`/search/${item.許可證字號}`}><div className="font-bold text-base sm:text-lg text-cyan-900 mb-2">{item.中文品名}</div><div className="text-sm sm:text-base">{item.英文品名}</div></Link>
                                         </div>
                                         <div className="flex-auto"></div>
-                                        <img src={cancel} className="w-8 h-8 justify-self-end cursor-pointer" onClick={() => handleDelete( item.id )}/>
+                                        <img src={cancel} className="w-8 h-8 justify-self-end cursor-pointer" onClick={() => handleDelete( uid, item.id )}/>
                                     </div>                              
                                 </div>
                             );
                         }
                         )}
-                        <button className="black-button mx-auto mt-4 w-20" onClick={() => goCheck()}>Submit</button>
-                    </div>
-                    
+                        <button className="black-button mx-auto mt-4 w-20" onClick={() => goCheck( uid )}>送出</button>
+                        <div id="alert" className="text-rose-500 text-center font-semibold text-lg tracking-wide"></div>
+                    </div>  
                 </div>
                 <div className="w-full md:w-[43%]" onMouseOver={close}>
-                    <div className={checkState===""?"w-[80%] md:w-full h-[420px] md:h-[90%] font-JasonHandwriting1-Regular text-slate-900 rounded-md mt-5 border mx-auto md:ml-3 bg-zinc-50":"w-[80%] h-auto md:w-full font-JasonHandwriting1-Regular text-slate-900 rounded-md mt-5 border mx-auto md:ml-3 bg-zinc-50"}>
-                        <div className={checkState===""? "hidden":"w-[90%] xs:w-[80%] mx-auto mt-[45px] text-left text-3xl leading-10 font-semibold tracking-widest "}>
+                    <div className={checkState===""?"w-[90%] xss:w-[80%] xs:w-[75%] md:w-full h-[420px] md:h-[90%] font-JasonHandwriting1-Regular text-slate-900 rounded-md mt-5 border mx-auto md:ml-3 bg-zinc-50":
+                        ( checkState==="查無重複用藥問題，"? "w-[90%] xss:w-[80%] h-[420px] md:h-[90%] md:w-full font-JasonHandwriting1-Regular text-slate-900 rounded-md mt-5 border mx-auto md:ml-3 bg-zinc-50":
+                            "w-[90%] xss:w-[80%] xs:w-[75%] h-auto md:w-full font-JasonHandwriting1-Regular text-slate-900 rounded-md mt-5 border mx-auto md:ml-3 bg-zinc-50" ) }>
+                        <div className={checkState===""? "hidden":"w-[90%] xss:w-[80%] xs:w-[75%] mx-auto mt-[45px] text-left text-3xl leading-10 font-semibold tracking-widest "}>
                             <span className="text-4xl mb-5">結果如下</span>
                             <hr className="mt-4"/>
                             {resultState.map( function( item ) {

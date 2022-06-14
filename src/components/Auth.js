@@ -1,19 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Outlet, Navigate } from "react-router-dom";
-
+import { AuthContext } from "../App";
 
 const Auth=() => {
-    let userStatus=false;
-    const statusNow =localStorage.getItem( "userStatus" );
+    
+    const { isSignedIn } = useContext( AuthContext );
 
-    if( statusNow !== null ) {
-        userStatus=true;
-    }
-    else{
-        userStatus=false;
-    }
+    const [ signedIn ] = isSignedIn;
 
-    return userStatus ? <Outlet /> : <Navigate to="/signinup" />;	
+    return ( 
+        signedIn ? <Outlet /> : <Navigate to="/signinup" /> 
+    );	
 };
 
 export default Auth;

@@ -1,19 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../App";
 //圖片
 import github from "../img/github.png";
 import email from "../img/email.png";
 import linkedin from "../img/linkedin.png";
 
 const Footer = () => {
+    const { isSignedIn } = useContext( AuthContext );
+
+    const [ signedIn ] = isSignedIn;
+
     return (
         <footer className="bg-darkblue backdrop-grayscale h-auto footer:h-56 relative font-inter text-base">
             <div className="pt-10 ">
                 <div className="ml-0 footer:ml-16 text-slate-400 block footer:flex text-center">
-                    <div className="mr-0 footer:mr-8 mb-3 footer:mb-0 hover:text-white"><Link to="/">Homepage</Link></div>
-                    <div className="mr-0 footer:mr-8 mb-3 footer:mb-0 hover:text-white"><Link to="/search">Find Drugs</Link></div>
-                    <div className="mr-0 footer:mr-8 mb-3 footer:mb-0 hover:text-white"><Link to="/duplicate_check">Duplicate Checker</Link></div>
-                    { localStorage.getItem( "userStatus" ) ? <Link to="/member"><div className="mr-0 footer:mr-8 mb-3 footer:mb-0 hover:text-white">Member</div></Link>:<div className="mr-0 footer:mr-8 mb-3 footer:mb-0 hover:text-white"><Link to="/member">Sign in</Link></div>}
+                    <div className="mr-0 footer:mr-8 mb-3 footer:mb-0 hover:text-white"><Link to="/">首頁</Link></div>
+                    <div className="mr-0 footer:mr-8 mb-3 footer:mb-0 hover:text-white"><Link to="/search">搜尋藥品</Link></div>
+                    <div className="mr-0 footer:mr-8 mb-3 footer:mb-0 hover:text-white"><Link to="/duplicate_check">檢查重複用藥</Link></div>
+                    { signedIn ? <Link to="/member"><div className="mr-0 footer:mr-8 mb-3 footer:mb-0 hover:text-white">會員區</div></Link>:<div className="mr-0 footer:mr-8 mb-3 footer:mb-0 hover:text-white"><Link to="/member">登入</Link></div>}
                 </div>
                 <hr className="w-11/12 bg-slate-300 h-px mx-auto my-8"/>
             </div>
