@@ -198,7 +198,7 @@ const SearchPage = () => {
                         <option value="全部藥品">全部藥品</option>
                     </select>  
                     <Configure hitsPerPage={10} />
-                    <div className="relative block justify-center">
+                    <div id="normalSearch" className="relative block justify-center">
                         <img src={search} className="w-7 h-7 absolute top-8 left-[3.1rem] tablet:left-3" />
                         <SearchBox />
                     </div> 
@@ -222,7 +222,7 @@ const SearchPage = () => {
                     <div id="classification" className={isActive ?"text-xl font-bold cursor-pointer bg-blue-50 border-slate-200 border-2 rounded-lg block md:hidden w-20 text-center h-10 leading-10  ml-10 ":"text-xl font-bold mt-2.5 cursor-pointer bg-blue-50 border-slate-200 border-2 rounded-lg block md:hidden w-20 text-center ml-10 h-10 leading-10"} onClick={showSortList}>分類</div>
                     <div className={isActive ? "block bg-slate-600 ml-10 rounded-md fixed left-[14%] xxs:left-[20%] xs:left-[25%] footer:left-[33%] top-[16%]  xs:top-[19%] tablet:top-[21%] z-10 w-[200px]" :"hidden"}>
                         <div className="flex relative">
-                            <select className={isActive ? "block bg-dropdown rounded-xl border h-10 pl-5 mt-4 ml-4":"hidden"} onClick={ e => changeType( e )}>
+                            <select className={isActive ? "block bg-dropdown rounded-xl border h-[2.75rem] pl-5 mt-4 ml-4":"hidden"} onClick={ e => changeType( e )}>
                                 <option className="black-button" value="劑型" >藥品劑型</option>
                                 <option className="black-button" value="藥品類別" >藥品類別</option>
                                 <option className="black-button" value="許可證種類" >許可證種類</option>
@@ -230,8 +230,7 @@ const SearchPage = () => {
                                 <option className="black-button" value="製造廠國別" >製造廠國別</option>
                             </select>
                             <img src={close} className="w-[30px] h-[30px] invert absolute left-[166px] top-[20px] cursor-pointer" onClick={cancel}/>
-                        </div>
-                       
+                        </div>     
                         <RefinementList operator="or" attribute={type} className="w-40 search:w-48 lg:w-52 mx-auto text-base"/>
                     </div>
                 </div>      

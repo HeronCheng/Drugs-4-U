@@ -182,7 +182,11 @@ select::-ms-expand {
     #nav{
         display: none;
     }
-    .ais-SearchBox .ais-SearchBox-input {
+    #normalSearch .ais-SearchBox .ais-SearchBox-input {
+        width: 14rem;
+        margin-left: 2.5rem;
+    }
+    #dupSearch .ais-SearchBox .ais-SearchBox-input {
         width: 14rem;
     }
 }
