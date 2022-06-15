@@ -14,10 +14,7 @@ import warning from "../img/undraw_notify.svg";
 
 
 const HomePageMain = () => {
-    // const goToSecond = () => {
-    //     window.scrollTo( 0, 700 );
-    //  onClick={goToSecond}
-    // };
+
     const goToFirst = () => {
         window.scrollTo( 0, 0 );
     };
