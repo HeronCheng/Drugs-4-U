@@ -273,7 +273,7 @@ const DuplicatePage = () => {
             <div className="pt-[67px] bg-darkblue z-0 " >                 
             </div>           
             <div className="mt-5 mb-10 md:my-5 block md:flex w-full justify-center" >
-                <div className={dupCheckList.length<2?"w-full md:w-[44%] h-[440px] px-5 pb-5":"w-full md:w-[44%] px-5 pb-5"}>
+                <div className={dupCheckList.length<2?"w-full md:w-[44%] h-[460px] px-5 pb-5":"w-full md:w-[44%] px-5 pb-5"}>
                     <div className="w-full xss:w-[90%] xs:w-[80%] md:w-full mx-auto">
                         <InstantSearch searchClient={searchClient} indexName="undischarged">
                             <div className="bg-white block dup:flex">   
