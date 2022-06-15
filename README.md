@@ -1,5 +1,5 @@
 # Drugs-4-U
-Drugs-4-U is a website you can search drugs & medicines which are licensed in Taiwan.  
+:pill: Drugs-4-U is a website you can search drugs & medicines which are licensed in Taiwan.  
 <p align="center">
   <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/white%20logo.png" alt="Website Logo" width="350px"/>
 </p>
@@ -16,3 +16,11 @@ You can add medicines to the list on the member page and export your documents a
 ![image](src/img/Drugs4U%20-%202_.gif)
 You can choose the medicines you eat and check whether duplicate medications exist.
 ![image](src/img/Drugs4U%20-%203_.gif)
+
+
+## Contact
+
+:cat2: 鄭羽筑 Yu-Chu, Cheng
+<br/>
+
+:email: Email: jc16884@gmail.com
