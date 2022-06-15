@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Typesense from "typesense";
 //圖片
-import underConstruction1 from "../../img/undercontruction.jpg";
+import underConstruction from "../../img/undraw_under_construction.svg";
 //components
 import ChartTablet from "./ChartTablet.js";
 import ChartOthers from "./ChartOthers.js";
@@ -130,7 +130,7 @@ const PriceChart = ( { id, name } ) => {
                 chartData[0].document.劑型 === "膠囊劑" ||
                 chartData[0].document.劑型 === "糖衣錠" ? 
                     <ChartTablet chartData={chartData} options={options} name={name}/>:
-                    <ChartOthers chartData={chartData} /> ): <img src={underConstruction1}/> }
+                    <ChartOthers chartData={chartData} /> ): <img src={underConstruction} className="w-[90%] h-auto mx-auto my-[15px]"/> }
         </>
     );
 };

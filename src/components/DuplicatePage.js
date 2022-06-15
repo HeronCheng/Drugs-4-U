@@ -278,7 +278,7 @@ const DuplicatePage = () => {
                         <InstantSearch searchClient={searchClient} indexName="undischarged">
                             <div className="bg-white block dup:flex">   
                                 <Configure hitsPerPage={6} />
-                                <div className="relative">
+                                <div id="dupSearch" className="relative">
                                     <img src={search} className="w-7 h-7 absolute top-8 left-3" />
                                     <SearchBox onClick={open} />
                                     {
@@ -293,8 +293,8 @@ const DuplicatePage = () => {
                             </div>                                       
                         </InstantSearch>     
                         <div className="flex mt-3 mb-5 bg-gradient-to-r from-blue-300 to-white rounded">
-                            <img src={listIcon}/>
-                            <div className="leading-[3rem] font-extrabold text-2xl tracking-widest ml-2" onMouseOver={close}>已選擇藥品&nbsp;&nbsp;<span className="text-base tracking-wide">請至少選擇<span className="text-rose-500">2個</span>品項</span></div>
+                            <img src={listIcon} className="w-[48px] h-[48px]"/>
+                            <div className="leading-[3rem] font-extrabold text-2xl tracking-widest ml-2" onMouseOver={close}>已選擇藥品</div>
                         </div>
                         {dupCheckList.map( function( item,index ) {
                             return (

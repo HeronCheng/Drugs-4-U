@@ -76,7 +76,7 @@ const SignInUpPage = () => {
                                     <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
                                     <div id="loader" className="text-center">Loading...</div>
                                 </div>
-                                <div className={isClose?"fixed border-2 border-slate-600 rounded p-5 top-[45%] tablet:top-[49%] main:top-[19%] left-[5%] shadow-xl w-[280px] mt-[5px]":"hidden"}>
+                                <div className={isClose?"fixed border-2 border-slate-600 rounded p-5 top-[45%] tablet:top-[49%] main:top-[19%] left-[13.5%] xss:left-[5%] shadow-xl w-[280px] mt-[5px]":"hidden"}>
                                     <img src={close} className="w-8 ml-[92%] mt-[-5%] cursor-pointer"onClick={goClose} />
                                     <p className="mt-[6%] mb-[6%]"><span className="pt-4"><span className="font-semibold">測試帳號 : </span><span className="text-sky-700">test@test.com</span></span><img id="copy" src={copy} className="w-7 cursor-pointer inline ml-2" onClick={copyToClipBoard1} title="複製" /></p>
                                     <p><span className="pt-4"><span className="font-semibold">測試密碼 : </span><span className="text-sky-700">testtest</span></span><img id="copy" src={copy} className="w-7 cursor-pointer inline ml-2" onClick={copyToClipBoard2} title="複製" /></p>
