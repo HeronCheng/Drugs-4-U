@@ -47,10 +47,8 @@ const PriceChart = ( { id, name } ) => {
                     }
                     return filtered;
                 },[] );
-                setChartData( newArr );
-                
-            } );
-        
+                setChartData( newArr );               
+            } );        
     },[] );
 
 
