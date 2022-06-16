@@ -8,6 +8,21 @@
 - Test account : test@test.com   <br/>
 - Test password : testtest  
 
+## Table of Content
+
+- [Frontend Technique](#frontend-technique)
+  - [React](#react)
+  - [Tailwind CSS](#tailwind-css)
+  - [ESLint](#eslint)
+  - [Webpack & Babel](#webpack--babel)
+  - [Third Party Library](#third-party-library)
+  - [Responsive Web Design](#responsive-web-design)
+- [Backend Technique](#backend-technique)
+  - [Firebase](#firebase)
+  - [Web Crawler](#web-crawler)
+  - [Third Party Library](#third-party-library-1)
+- [Main Features](#main-features)
+- [Contact](#contact)
 
 ## Frontend Technique
 
@@ -18,7 +33,10 @@
 
     <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/componentStructure.png" alt="Component Structure" width="800px"/>
 
-- React Router (version 6) : use to manage SPA routing  
+- React Router (version 6) : use to manage SPA routing 
+  - Routers : `BrowserRouter`
+  - Components : `Routes`, `Route`, `Outlet`, `Navigate`, `Link`
+  - Hooks : `useParams`  
 - React Context API : manage state globally between deeply nested components
 
 ### Tailwind CSS
@@ -72,16 +90,19 @@
 
     <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/Drugs4U%20-%201_.gif" alt="Website demo1" width="600px" height="400px"/>
 
+<br>
+
 - Members Only
   - You can add medicines to favorites on the search page and you can see the list on the memeber page. 
   - You can export your list as PDF files.
 
-    <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/Drugs4U%20-%202_.gif" alt="Website demo2" width="600px" height="400px"/>
-  
+    <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/Drugs4U%20-%202_.gif" alt="Website demo2" width="600px" height="400px"/>  
+
   - You can choose the medicines you eat and check whether duplicate medications exist.
 
     <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/Drugs4U%20-%203_.gif" alt="Website demo3" width="600px" height="400px"/>
 
+<br> 
 
 ## Contact
 
