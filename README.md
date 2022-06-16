@@ -3,46 +3,92 @@
 <p align="center">
   <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/white%20logo.png" alt="Website Logo" width="350px"/>
 </p>
-This is my website : https://drugs-4-u.firebaseapp.com/  <br/><br/>
+:link: This is my website : https://drugs-4-u.firebaseapp.com/  <br/><br/>
 
 - Test account : test@test.com   <br/>
 - Test password : testtest  
 
-## Demo
 
-- You can use English keywords to search for medicines.
+## Frontend Technique
 
- <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/Drugs4U%20-%201_.gif" alt="Website demo1" width="600px" height="400px"/>
+### React 
+- Use React ( hook ) to build a single-page application(SPA) and create reusable components.
+  - Hook API : `useState`, `useEffect`, `useContext`
+  - Components Structure Design
 
-- You can add medicines to the list on the member page and export your documents as PDF files.
+    <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/componentStructure.png" alt="Component Structure" width="800px"/>
 
- <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/Drugs4U%20-%202_.gif" alt="Website demo2" width="600px" height="400px"/>
+- React Router (version 6) : use to manage SPA routing  
+- React Context API : manage state globally between deeply nested components
+
+### Tailwind CSS
+- A utility-first CSS framework, easy to use and maintain
+
+### ESLint
+- Use to find and fix problems in JavaScript code and keep coding style consistent
+
+### Webpack & Babel
+- Webpack : module bundler for JavaScript application
+- Babel : transpiler for different versions of JavaScript
+
+### Third Party Library
+- [react-chartjs-2](https://react-chartjs-2.js.org/)
+- [Print.js](https://printjs.crabbly.com/)
+- [Animista](https://animista.net/)
+
+### Responsive Web Design
+
+  <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/RWDdemo.png" alt="Show RWD" width="600px"/>
 
 
-- You can choose the medicines you eat and check whether duplicate medications exist.
+## Backend Technique
 
- <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/Drugs4U%20-%203_.gif" alt="Website demo3" width="600px" height="400px"/>
+### Firebase
+- Firestore
+  - To store medicine's detailed data ( such as name, unique ID, price, etc. ) 
+  - Database Schema
+ 
+    <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/databaseStructure.png" alt="database schema" width="600px"/>
+    
+- Firebase Storage
+  - Store medicine's picures
+- Authentication
+  - Authenticate with Google login and with users' email addresses and passwords
+  - Use Firebase pre-built UI
+- Hosting
+  - Host JavaScript application's static assets 
+
+### Web Crawler
+- Using Python to download over ten thousand medicines' pictures from [Taiwan Food and Drug Administration](https://info.fda.gov.tw/MLMS/H0001.aspx).
+
+### Third Party Library
+- [Typesense](https://typesense.org/) : search engine to build a full-text search in my website
 
 
-## Technique
+## Main Features
 
-| Skill                     | Description                                                                                                                          |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| React ( hook )            | Single-page application, create reusable components                                                                                  |
-| React Router              | A client and server-side routing library for React                                                                                   |
-| React Context             | A way to manage state globally between deeply nested components                                                                      |
-| Tailwind CSS              | A utility-first CSS framework, easy to use and maintain                                                                              |
-| ESLint                    | A tool to help you find and fix problems in your JavaScript code.                                                                    |
-| Firebase                  | Firestore, Storage, Authentication, Hosting for Back-End                                                                             |
-| Webpack                   | A static module bundler for JavaScript applications.                                                                                 |
-| Python                    | Used for web crawler                                                                                                                 |
-| Third Party Library       | [Typesense](https://typesense.org/), [react-chartjs-2](https://react-chartjs-2.js.org/), [Print.js](https://printjs.crabbly.com/), [Animista](https://animista.net/)  |
+- Searching Medicines
+  - You can use medicine's Chinese name, English name or ingredient to search for whatever medicines you want.
 
-<br/>
+    <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/Drugs4U%20-%201_.gif" alt="Website demo1" width="600px" height="400px"/>
+
+- Members Only
+  - You can add medicines to favorites on the search page and you can see the list on the memeber page. 
+  - You can export your list as PDF files.
+
+    <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/Drugs4U%20-%202_.gif" alt="Website demo2" width="600px" height="400px"/>
+  
+  - You can choose the medicines you eat and check whether duplicate medications exist.
+
+    <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/Drugs4U%20-%203_.gif" alt="Website demo3" width="600px" height="400px"/>
+
 
 ## Contact
 
 :cat2: 鄭羽筑 Yu-Chu, Cheng
 <br/>
 
-:email: Email: jc16884@gmail.com
+:email: Email : jc16884@gmail.com
+<br/>
+
+:mag: [Linkedin](https://www.linkedin.com/in/%E7%BE%BD%E7%AD%91-%E9%84%AD-a86a6220b/)
