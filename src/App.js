@@ -5,10 +5,10 @@ import auth from "./firebaseConfig";
 //components
 import HomePage from "./components/HomePage";
 import SearchResultPage from "./pages/searchResultPage/SearchResultPage";
-import DuplicatePage from "./components/DuplicatePage";
+import DuplicatePage from "./pages/duplicatePage/DuplicatePage";
 import SignInUpPage from "./components/SignInUpPage";
-import MemberPage from "./components/MemberPage";
-import SearchPage from "./components/SearchPage";
+import MemberPage from "./pages/memberPage/MemberPage";
+import SearchPage from "./pages/searchPage/SearchPage";
 import Auth from "./components/Auth";
 
 

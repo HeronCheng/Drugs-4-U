@@ -57,7 +57,6 @@ const StorageData = ( id ) => {
     const showList = () => {
         setInsertIsActive( !insertIsActive );
     };
-
     
     const InsertSelectOption = () => {
         const newArr1 = packageInsert.split( ";" );
@@ -79,7 +78,6 @@ const StorageData = ( id ) => {
         
     };
 
-
     const [ packageIsActive, setPackageIsActive ] = useState( false );
     const showTheList = () => {
         setPackageIsActive( !packageIsActive );
@@ -94,20 +92,16 @@ const StorageData = ( id ) => {
                 <div className={packageIsActive? "absolute left-[14px] top-[54px] z-10 bg-slate-50 rounded-md p-2 w-28 text-center":"hidden"}>
                     {
                         ( newArr2.map( ( url, index ) => {
-
                             return (
                                 <a href={url} key={index} className="mx-auto mb-3.5 block">圖檔連結{index+1}</a>
                             );
                         } ) )
                     }
                 </div>
-            </div>
-            
-        );
-        
+            </div>        
+        );       
     };
     
-
     return(
         <>
             <div>
@@ -130,6 +124,5 @@ const StorageData = ( id ) => {
         </>
     );
 };
-
 
 export default StorageData;

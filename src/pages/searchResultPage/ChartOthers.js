@@ -1,5 +1,5 @@
 import React from "react";
-import chartConfig from "./chartConfig";
+import chartConfig from "./chartOtherConfig";
 //圖表
 import {
     Chart as ChartJS,
@@ -32,16 +32,6 @@ const ChartOthers = ( { chartData } ) => {
     let arr1_6=[];
     let arr1_7=[];
     let arr1_8=[];
-
-    //確認藥品代碼首二碼相同
-    let prefix=chartData.map( ( data ) => {
-        return data.document.規格量;
-    } );
-    //去除重複的資料
-    let newPrefix = [ ...new Set( prefix ) ];
-
-    const len=newPrefix.length;
-
     let arr1_1_1=[];
     let arr1_1_2=[];
     let arr1_1_3=[];
@@ -74,6 +64,15 @@ const ChartOthers = ( { chartData } ) => {
     let arr1_8_2=[];
     let arr1_8_3=[];
     let arr1_8_4=[];
+
+    //確認藥品代碼首二碼相同
+    let prefix=chartData.map( ( data ) => {
+        return data.document.規格量;
+    } );
+    //去除重複的資料
+    let newPrefix = [ ...new Set( prefix ) ];
+
+    const len=newPrefix.length;
 
     if( len === 1 ) {
         arr1_1=chartData;

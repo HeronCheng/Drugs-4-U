@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { addDoc, fetchData, delDoc } from "./bookMark";
 //components
 import Nav from "../../components/Nav.js";
 import Footer from "../../components/Footer";
 import StorageData from "./StorageData";
 import PriceChart from "./PriceChart";
-import { db, doc, getDoc, setDoc } from "../../firebaseConfig";
+import { db, doc, getDoc } from "../../firebaseConfig";
 import NationalDN from "../../utils/nation";
 import { AuthContext } from "../../App";
 
@@ -16,11 +17,12 @@ import add from "../../img/bookmark_add.png";
 import fill from "../../img/bookmark_add_FILL.png";
 
 const SearchResultPage = () => {
+    //儲存從資料庫取出來的藥品資訊
     const [ drugData, setDrugData ] = useState ( "" );
     let { id } = useParams();
     
     useEffect( () => {
-        async function fetchData() {
+        async function fetchDrugData() {
             let docSnap = await getDoc( doc( db, "all", id ) );
             const data = docSnap._document.data.value.mapValue.fields;
             const drugDataArr = {
@@ -41,11 +43,12 @@ const SearchResultPage = () => {
             };
             return drugDataArr;
         }
-        fetchData().then( result => {
+        fetchDrugData().then( result => {
             setDrugData( result );
         } );
     }, [] );
 
+    //切換右方欄位的圖片跟圖表顯示
     const [ showPic, setShowPic ] = useState ( true );
     const [ showPrice, setShowPrice ] = useState ( false );
     const changeToPrice = ( ) => {
@@ -69,6 +72,7 @@ const SearchResultPage = () => {
         return showPrice;
     };
 
+    //確認登入狀態
     const { isSignedIn, userUid } = useContext( AuthContext );
 
     const [ signedIn ] = isSignedIn;
@@ -76,48 +80,8 @@ const SearchResultPage = () => {
 
     const [ bookMark, setBookMark ] = useState( false );
 
-    //添加收藏項目
-    const addDoc= ( ) => {
-        let newData={
-            中文品名 : drugData["中文品名"],
-            英文品名 : drugData["英文品名"],
-            許可證字號 : drugData["許可證字號"],
-            成分 : drugData["主成分略述"],
-            適應症 : drugData["適應症"]
-        };
-        async function addData() {
-            await setDoc( doc( db, "like_list", uid, "list", drugData["許可證字號"] ), newData );
-        }
-        addData()
-            .then( () => {
-                console.log( "Document written with ID: ", drugData["許可證字號"] );
-                setBookMark( true );
-            } )    
-            .catch ( ( e ) => console.error( "Error adding document: ", e ) );
-    };
-    //確認此藥品是否已收藏(抓資料庫中的資料)
-    const fetchData = async( ) => {
-        const docSnap = await getDoc( doc( db, "like_list", uid, "list", drugData["許可證字號"] ) );
-        return docSnap.data();
-    };
-
-
-    //刪除收藏項目
-    const delDoc = ( ) => {
-
-        async function delData() {
-            await deleteDoc( doc( db, "like_list", uid, "list", drugData["許可證字號"] ) );
-        }
-        
-        delData()
-            .then( () => {
-                console.log( "Document delete with ID: ", drugData["許可證字號"] );
-                setBookMark( false );
-            } )    
-            .catch ( ( e ) => console.error( "Error adding document: ", e ) );
-    };
-
-    fetchData().then( ( result ) => {
+    
+    fetchData( uid, drugData ).then( ( result ) => {
         if( result !== undefined ) {
             setBookMark( true );
         }
@@ -133,7 +97,7 @@ const SearchResultPage = () => {
             </div>
             <div className="flex justify-between">
                 <Link to="/search"><button className="black-button w-16 tracking-wider m-3 xss:m-7 ">Back</button></Link>
-                { signedIn ? <img src={bookMark?fill:add} className="w-12 h-12 m-7 cursor-pointer" onClick={bookMark?delDoc:addDoc}/> : "" }
+                { signedIn ? <img src={bookMark?fill:add} className="w-12 h-12 m-7 cursor-pointer" onClick={bookMark?() => delDoc( uid, drugData, bookMark, setBookMark ):() => addDoc( uid, drugData, bookMark, setBookMark )}/> : "" }
             </div>
             <div className="mb-20 block search:flex w-full justify-around">
                 <div className="mx-auto search:mx-0 w-full xss:w-[90%] xs:w-[80%] sm:w-[75%] search:w-[55%] border-stone-300 border-y-2 xss:border-2 border-solid rounded-none xss:rounded-md font-sans p-4 shadow-lg flex justify-center items-center">                            
@@ -202,8 +166,7 @@ const SearchResultPage = () => {
                                 </tbody>
                             </table>
                         </>
-                        ) :
-                        ( <img src={loading} className="w-24"/> )                                            
+                        ) : ( <img src={loading} className="w-24"/> )                                            
                     }
                 </div>
                 <div className="mt-10 search:mt-0 mx-auto search:mx-0 w-full xss:w-[90%] xs:w-[80%] sm:w-[75%] search:w-[37%] border-stone-300 border-y-2 xss:border-2 border-solid rounded-none xss:rounded-md shadow-lg ">
