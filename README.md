@@ -27,13 +27,13 @@
 ## Frontend Technique
 
 ### React 
-- Use React ( hook ) to build a single-page application(SPA) and create reusable components.
+- Use React ( hook ) to build a single-page application( SPA ) and create reusable components.
   - Hook API : `useState`, `useEffect`, `useContext`
   - Components Structure Design
 
     <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/componentStructure.png" alt="Component Structure" width="800px"/>
 
-- React Router (version 6) : use to manage SPA routing 
+- React Router ( version 6 ) : use to manage SPA routing 
   - Routers : `BrowserRouter`
   - Components : `Routes`, `Route`, `Outlet`, `Navigate`, `Link`
   - Hooks : `useParams`  
