@@ -9,7 +9,6 @@ import DuplicatePage from "./pages/duplicatePage/DuplicatePage";
 import SignInUpPage from "./components/SignInUpPage";
 import MemberPage from "./pages/memberPage/MemberPage";
 import SearchPage from "./pages/searchPage/SearchPage";
-import Auth from "./components/Auth";
 
 
 export const AuthContext = React.createContext(); 
@@ -38,13 +37,9 @@ const App = () => {
                         <Route path= "/" element = { <HomePage /> }/>
                         <Route path= "/search" element = { <SearchPage /> }/>
                         <Route path= "/search/:id" element = { <SearchResultPage /> }/>
-                        <Route path= "/member" element = { <Auth /> }>
-                            <Route path= "/member" element = { <MemberPage /> }/>
-                        </Route>
-                        <Route path= "/duplicate_check" element = { <Auth /> }>
-                            <Route path= "/duplicate_check" element = { <DuplicatePage /> }/>
-                        </Route>
-                        <Route path= "/signinup" element = { <SignInUpPage /> }/>                       
+                        <Route path= "/member" element = { <MemberPage /> }/>
+                        <Route path= "/duplicate_check" element = { <DuplicatePage /> }/>
+                        <Route path= "/signinup" element = { <SignInUpPage /> }/>  
                     </Routes>
                 </BrowserRouter>
             </AuthContext.Provider>            
