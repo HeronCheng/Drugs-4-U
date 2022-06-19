@@ -31,7 +31,7 @@
   - Hook API : `useState`, `useEffect`, `useContext`
   - Components Structure Design
 
-    <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/componentStructure.png" alt="Component Structure" width="800px"/>
+    <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/componentdesign.png" alt="Component Structure" width="800px"/>
 
 - React Router ( version 6 ) : use to manage SPA routing 
   - Routers : `BrowserRouter`
@@ -66,7 +66,7 @@
   - To store medicine's detailed data ( such as name, unique ID, price, etc. ) 
   - Database Schema
  
-    <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/databaseStructure.png" alt="database schema" width="600px"/>
+    <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/atabaseschema.png" alt="database schema" width="600px"/>
     
 - Firebase Storage
   - Store medicine's picures
