@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { addDoc, fetchData, delDoc } from "./bookMark";
 //components
 import Nav from "../../components/Nav.js";

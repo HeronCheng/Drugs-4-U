@@ -79,7 +79,7 @@ const Nav = () => {
                         <Link to="/duplicate_check">{toTW2 ? "重複用藥檢核" : "Duplicate Checker"}</Link>
                     </div>
                     <div id="3" className={toTW3 ?( "nav-button w-[75px] md:w-[80px] tracking-[.2em] mx-px xs:mx-0.5 sm:mx-2 md:mx-4 lg:mx-7" ):( "nav-button w-[75px] md:w-[80px] mx-px xs:mx-0.5 sm:mx-2 md:mx-4 lg:mx-7" )} onMouseEnter={changeToTW} onMouseLeave={backToEng}>
-                        { signedIn ? ( window.location.pathname==="/member"? <span onClick={exit}><Link to="/">{toTW3 ? "登出" : "Sign out"}</Link></span>:<Link to="/member">{toTW3 ? "會員區" : "Member" }</Link> ):<Link to="/signinup">{toTW3 ? "登入" : "Sign in" }</Link>}    
+                        { signedIn ? ( window.location.pathname==="/member"? <span onClick={exit}><Link to="/">{toTW3 ? "登出" : "Sign out"}</Link></span>:<Link to="/member">{toTW3 ? "會員區" : "Member" }</Link> ):<Link to="/member">{toTW3 ? "登入" : "Sign in" }</Link>}    
                     </div>
                 </div>
                 <img src={menu} id="menu" className="hidden" onClick={openMobileMenu}/>
@@ -95,7 +95,7 @@ const Nav = () => {
                     ( "cursor-pointer h-16 leading-11 mt-0.5 border-solid pl-4 text-slate-900 bg-slate-50 " )} onMouseEnter={changeToTW} onMouseLeave={backToEng} onClick={exit}><Link to="/">{toTW3 ? "登出" : "Sign out"}</Link></div>:
                     <Link to="/member"><div id="3" className={toTW3 ?( "cursor-pointer h-16 leading-11 mt-0.5 border-solid tracking-[.2em] pl-4" ):
                         ( "cursor-pointer h-16 leading-11 mt-0.5 border-solid pl-4 text-slate-900 bg-slate-50 " )} onMouseEnter={changeToTW} onMouseLeave={backToEng}>{toTW3 ? "會員區" : "Member"}</div></Link> ):
-                    <Link to="/signinup"><div id="3" className={toTW3 ?( "cursor-pointer h-16 leading-11 mt-0.5 border-solid tracking-[.2em] pl-4" ):( "cursor-pointer h-16 leading-11 mt-0.5 border-solid pl-4 text-slate-900 bg-slate-50 " )} onMouseEnter={changeToTW} onMouseLeave={backToEng}>
+                    <Link to="/member"><div id="3" className={toTW3 ?( "cursor-pointer h-16 leading-11 mt-0.5 border-solid tracking-[.2em] pl-4" ):( "cursor-pointer h-16 leading-11 mt-0.5 border-solid pl-4 text-slate-900 bg-slate-50 " )} onMouseEnter={changeToTW} onMouseLeave={backToEng}>
                         {toTW3 ? "登入" : "Sign in"}
                     </div></Link>
                 }    
