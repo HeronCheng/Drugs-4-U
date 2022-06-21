@@ -101,7 +101,6 @@
   - You can choose the medicines you eat and check whether duplicate medications exist.
 
     <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/Drugs4U%20-%203_.gif" alt="Website demo3" width="600px" height="400px"/>
-
 <br> 
 
 ## Contact
