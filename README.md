@@ -86,14 +86,14 @@
 ## Main Features
 
 - Searching Medicines
-  - You can use medicine's Chinese name, English name or ingredient to search for whatever medicines you want.
+  - You can use a medicine's Chinese name, English name, or ingredient to search for whatever medicines you want.
 
     <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/Drugs4U%20-%201_.gif" alt="Website demo1" width="600px" height="400px"/>
 
 <br>
 
 - Members Only
-  - You can add medicines to favorites on the search page and you can see the list on the memeber page. 
+  - You can add medicines to favorites on the search page and you can see the list on the member page. 
   - You can export your list as PDF files.
 
     <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/Drugs4U%20-%202_.gif" alt="Website demo2" width="600px" height="400px"/>  
