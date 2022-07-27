@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://github.com/HeronCheng/Drugs-4-U/blob/main/src/img/white%20logo.png" alt="Website Logo" width="350px"/>
 </p>
-:link: This is my website : https://drugs-4-u.firebaseapp.com/  <br/><br/>
+:link: This is my website : <strike>https://drugs-4-u.firebaseapp.com/</strike> (The website is no longer available.)   <br/><br/>
 
 - Test account : test@test.com   <br/>
 - Test password : testtest  
