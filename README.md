@@ -111,4 +111,4 @@
 :email: Email : jc16884@gmail.com
 <br/>
 
-:mag: [Linkedin](https://www.linkedin.com/in/%E7%BE%BD%E7%AD%91-%E9%84%AD-a86a6220b/)
+:mag: [Linkedin](https://www.linkedin.com/in/yu-chu-cheng-a86a6220b/)
